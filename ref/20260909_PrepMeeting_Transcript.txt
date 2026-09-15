@@ -1,0 +1,572 @@
+WEBVTT
+
+00:01:45.000 --> 00:01:47.000
+Luis Villavicencio: I'll start on you.
+
+00:01:47.000 --> 00:01:48.000
+Sharanya Krishnamurthi: It was…
+
+00:01:49.000 --> 00:01:52.000
+Sharanya Krishnamurthi: Good afternoon, how are you doing?
+
+00:01:52.000 --> 00:01:54.000
+Luis Villavicencio: Good, how are you?
+
+00:01:53.000 --> 00:01:55.000
+Sharanya Krishnamurthi: Good, I'm good.
+
+00:01:59.000 --> 00:02:03.000
+Luis Villavicencio: How are things going? How many projects are you working on?
+
+00:02:03.000 --> 00:02:12.000
+Sharanya Krishnamurthi: So I'm actually working on two right now, and one of them has to wrap up this week, but it looks like it might extend slightly to next week as well.
+
+00:02:12.000 --> 00:02:15.000
+Luis Villavicencio: Okay, cool. So this…
+
+00:02:13.000 --> 00:02:16.000
+Sharanya Krishnamurthi: But it's almost done, yeah.
+
+00:02:16.000 --> 00:02:19.000
+Luis Villavicencio: This project is supposed to start next week.
+
+00:02:18.000 --> 00:02:26.000
+Sharanya Krishnamurthi: Yes, for us, it is next week. I think it has already started for the platform team. Uh, the MLOps component is going to be from next week, if I'm not wrong.
+
+00:02:22.000 --> 00:02:24.000
+Luis Villavicencio: Um, okay.
+
+00:02:27.000 --> 00:02:29.000
+Brendan Owens: Hey, everyone. Sorry I'm late.
+
+00:02:28.000 --> 00:02:30.000
+Sharanya Krishnamurthi: Hey, Brendan.
+
+00:02:30.000 --> 00:02:31.000
+Sharanya Krishnamurthi: No worries.
+
+00:02:31.000 --> 00:02:33.000
+Luis Villavicencio: Hey, Brendan.
+
+00:02:31.000 --> 00:02:34.000
+Brendan Owens: How are you all? Hey, Luis. Long time.
+
+00:02:34.000 --> 00:02:36.000
+Luis Villavicencio: Yeah, go ahead, hurry up.
+
+00:02:36.000 --> 00:02:38.000
+Brendan Owens: Good, good. How are you?
+
+00:02:42.000 --> 00:02:44.000
+Brendan Owens: Uh, we'll give…
+
+00:02:44.000 --> 00:02:50.000
+Brendan Owens: Wole and William a second, and then we'll get started.
+
+00:02:51.000 --> 00:02:53.000
+Luis Villavicencio: Right.
+
+00:03:20.000 --> 00:03:22.000
+Brendan Owens: Let's see.
+
+00:03:23.000 --> 00:03:26.000
+Brendan Owens: Um, alright, let's…
+
+00:03:26.000 --> 00:03:29.000
+Brendan Owens: I'll ping them, and then we'll get started.
+
+00:03:45.000 --> 00:03:53.000
+Brendan Owens: But, alright, so thank you both for joining, and welcome to the Arkema team. So…
+
+00:03:53.000 --> 00:03:59.000
+Brendan Owens: For context, I believe I shared with you the TDR, correct?
+
+00:03:59.000 --> 00:04:02.000
+Sharanya Krishnamurthi: Yeah, you did, yeah.
+
+00:04:00.000 --> 00:04:13.000
+Brendan Owens: Okay, perfect. But I'll pull it up to just walk through, kind of, what I'm talking about. But to give you an overall account context, so Arkema is not a contracted customer yet.
+
+00:04:13.000 --> 00:04:22.000
+Brendan Owens: They are currently on an on-demand kind of trial account until they sign their CAP1.
+
+00:04:22.000 --> 00:04:23.000
+Brendan Owens: Oh.
+
+00:04:23.000 --> 00:04:30.000
+Brendan Owens: Basically, what they've been doing is they've been working with the account team.
+
+00:04:30.000 --> 00:04:35.000
+Brendan Owens: and the industry's team to create this pricing cockpit app.
+
+00:04:35.000 --> 00:04:50.000
+Brendan Owens: Um, and sorry if it's not called that, I have a couple pricing customers right now. One of them calls it the pricing agent, one of them calls it the pricing cockpit. I'm not sure which is which anymore. Um, they either call it the pricing agent or pricing cockpit.
+
+00:04:50.000 --> 00:05:06.000
+Brendan Owens: And so they worked with the industry team to build this app. And the initial, I, and, and the reason they're kind of building this app now before their contract is it's basically their pitch to say, okay, like.
+
+00:05:06.000 --> 00:05:12.000
+Brendan Owens: This is what Snowflake can deliver for us, something like that. They're going to take it to their leadership.
+
+00:05:12.000 --> 00:05:21.000
+Brendan Owens: And it's basically going to be the pitch for a bigger contract, mostly revolving around SAP.
+
+00:05:21.000 --> 00:05:27.000
+Brendan Owens: How this was supposed to go down was our industry team built the app.
+
+00:05:27.000 --> 00:05:32.000
+Brendan Owens: PHData was going to invest it all and deploy the app for them.
+
+00:05:32.000 --> 00:05:39.000
+Brendan Owens: PHData backed out, they're not doing it, uh, they were gonna charge the customer, so we… we invested it.
+
+00:05:38.000 --> 00:05:40.000
+Sharanya Krishnamurthi: Mm-hmm.
+
+00:05:39.000 --> 00:05:45.000
+Brendan Owens: And so I kind of scrambled, but last minute, like we scoped this out.
+
+00:05:45.000 --> 00:05:47.000
+Brendan Owens: But there's essentially…
+
+00:05:47.000 --> 00:05:58.000
+Brendan Owens: kind of 3 work streams, and uh… Wole will handle the first work stream, which is, like, the platform foundation piece. So, setting up, like, the security.
+
+00:05:58.000 --> 00:06:05.000
+Brendan Owens: and kind of basics and the data ingestion for the tables in the app. We're getting a production environment.
+
+00:06:05.000 --> 00:06:16.000
+Brendan Owens: There are some ML features within the app, so that's the second work stream. So William will be responsible for editing those, working on those, and validating those.
+
+00:06:21.000 --> 00:06:37.000
+Brendan Owens: And wait, I might have mixed up your roles. You guys are working on the ML piece. William is deploying the app. So there's ML pieces in the app that you all will kind of work on and validate and configure it.
+
+00:06:25.000 --> 00:06:27.000
+Sharanya Krishnamurthi: You're welcome, and yeah.
+
+00:06:37.000 --> 00:06:42.000
+Brendan Owens: Uh, to run, and then William will work to deploy it in the app.
+
+00:06:42.000 --> 00:06:43.000
+Brendan Owens: So…
+
+00:06:49.000 --> 00:06:52.000
+Sharanya Krishnamurthi: I don't think so.
+
+00:06:52.000 --> 00:06:55.000
+Sharanya Krishnamurthi: I didn't get any email or anything yet.
+
+00:06:59.000 --> 00:07:00.000
+Sharanya Krishnamurthi: Hmm.
+
+00:07:05.000 --> 00:07:06.000
+Brendan Owens: But…
+
+00:07:11.000 --> 00:07:13.000
+Brendan Owens: is let me pull it up.
+
+00:07:19.000 --> 00:07:26.000
+Brendan Owens: Wole has already started, and he's been working with them, but that's kind of as expected. He was supposed to start here.
+
+00:07:26.000 --> 00:07:38.000
+Brendan Owens: you all start next week, not at your full time, kind of at your 10 hours. So, that will be a little ramp-up period. Um, important to note.
+
+00:07:53.000 --> 00:08:03.000
+Brendan Owens: that's fine. No new feature request. So, like, if they ask any feature request, tell me, it's an automatic no. There's nothing new coming to the app.
+
+00:08:03.000 --> 00:08:06.000
+Brendan Owens: Rashab from our industry team.
+
+00:08:06.000 --> 00:08:10.000
+Brendan Owens: We'll stop editing the app on the 21st.
+
+00:08:09.000 --> 00:08:10.000
+Sharanya Krishnamurthi: Mmhm.
+
+00:08:14.000 --> 00:08:20.000
+Brendan Owens: That's it. He hands it over to us. We deploy it to production.
+
+00:08:20.000 --> 00:08:23.000
+Brendan Owens: Customer knows that, Rashab knows that, no more.
+
+00:08:24.000 --> 00:08:36.000
+Brendan Owens: I don't think they will try to push. This guy actually seems pretty nice, like, you can kind of tell when a customer will ask for everything. This guy's actually, like, pretty nice and pretty considerate, like, I don't think he will ask for that.
+
+00:08:36.000 --> 00:08:51.000
+Brendan Owens: But if they do, that's kind of the… the account team might. That's who will ask you. The account team might ask you to do it, and I know this account team will, and you can tell them no, and I will… and if they ask you directly instead of asking me, I will tell them no.
+
+00:08:51.000 --> 00:08:56.000
+Brendan Owens: Um, but so, you guys will start next week, we'll get you onboarded.
+
+00:08:56.000 --> 00:09:01.000
+Brendan Owens: and work with the team, and then you'll kind of work on the ML piece. Um…
+
+00:09:02.000 --> 00:09:16.000
+Brendan Owens: If I'm… I can't answer any scope questions. I scoped this out with Jake Neal, and he… for the ML piece, he got help. I didn't work directly with Kelsey on this one, but he got help from Kelsey Gonzalez.
+
+00:09:16.000 --> 00:09:17.000
+Brendan Owens: On this.
+
+00:09:17.000 --> 00:09:32.000
+Brendan Owens: She is going out on maternity leave very soon. So I think next week, we'll get you access to the app, and you can go through it. And I think next week, just focus on getting onboarded, figuring out what's in the app, what, like, what you're gonna be doing.
+
+00:09:32.000 --> 00:09:35.000
+Brendan Owens: Um, and we'll go from there.
+
+00:09:37.000 --> 00:09:40.000
+Brendan Owens: Any questions from you all?
+
+00:09:42.000 --> 00:09:51.000
+Sharanya Krishnamurthi: Sounds good. So do you know, like, what is the split between myself and Luis on this? Because both of us will be working on the ML part.
+
+00:09:50.000 --> 00:09:51.000
+Brendan Owens: Um…
+
+00:09:51.000 --> 00:09:58.000
+Brendan Owens: You're split 50 50. So however works for you all, I'm good with.
+
+00:09:54.000 --> 00:09:55.000
+Sharanya Krishnamurthi: Got it.
+
+00:09:57.000 --> 00:09:58.000
+Sharanya Krishnamurthi: Got it, yeah.
+
+00:09:58.000 --> 00:10:10.000
+Brendan Owens: I'm your… I… I got you both onboarded, so you'll both have access, so if you want… one person wants to be hands-on keyboard, the other's helping out in the background, whatever works for you all is fine with me.
+
+00:09:58.000 --> 00:10:00.000
+Luis Villavicencio: Garrett?
+
+00:10:09.000 --> 00:10:10.000
+Sharanya Krishnamurthi: Noted, yeah.
+
+00:10:11.000 --> 00:10:15.000
+Sharanya Krishnamurthi: So we will discuss that internally, and we'll figure it out, yeah. No worries.
+
+00:10:14.000 --> 00:10:22.000
+Luis Villavicencio: Yeah, let's understand better the scope. So, at the end of next week, we can probably just discuss that, Sharon.
+
+00:10:22.000 --> 00:10:23.000
+Sharanya Krishnamurthi: Sure.
+
+00:10:23.000 --> 00:10:24.000
+Brendan Owens: Yeah.
+
+00:10:25.000 --> 00:10:34.000
+Wole Babalola: My my apologies for joining late. I had another customer call. It ran way beyond what I anticipated. But.
+
+00:10:30.000 --> 00:10:32.000
+Brendan Owens: No problem.
+
+00:10:34.000 --> 00:10:37.000
+Wole Babalola: Nice to meet you all, you know. Yeah.
+
+00:10:35.000 --> 00:10:37.000
+Sharanya Krishnamurthi: And I think you do.
+
+00:10:37.000 --> 00:10:46.000
+Wole Babalola: So right now, I guess the only thing I can say right now is just just trying to get a platform, you know, get access online on.
+
+00:10:46.000 --> 00:10:57.000
+Wole Babalola: You know, the platform key foundation, so now we can, once we bypass that, we have all the access and stuff, and then things will become a lot easier for us.
+
+00:10:57.000 --> 00:10:59.000
+Sharanya Krishnamurthi: Oh, yeah.
+
+00:10:58.000 --> 00:11:04.000
+Brendan Owens: And how did the calls go this morning? Well, uh, you, uh, you were on the call…
+
+00:10:58.000 --> 00:10:59.000
+Wole Babalola: And…
+
+00:11:02.000 --> 00:11:07.000
+Wole Babalola: Yeah, I was on both. Yeah, I was on both calls. Yeah, I was on both calls, yes.
+
+00:11:05.000 --> 00:11:06.000
+Brendan Owens: Yeah, how…
+
+00:11:07.000 --> 00:11:08.000
+Brendan Owens: How'd they go?
+
+00:11:07.000 --> 00:11:16.000
+Wole Babalola: So, yeah, it went, it went well, it went very well, and I was the one that actually brought up, you know, because the original, the first half of the call.
+
+00:11:16.000 --> 00:11:23.000
+Wole Babalola: was to do the SSO on the SCIM, and the second part of the call was on the S3 bucket.
+
+00:11:23.000 --> 00:11:38.000
+Wole Babalola: So trying to understand what are the things they need on their side and how it works on Snowflake side. So we talk a little bit also about the data itself expectation from ingestion perspective. Are we just ingesting the data as is?
+
+00:11:38.000 --> 00:11:56.000
+Wole Babalola: you know, from AWS, or is there any expectation from doing some transformation and all of that? And but based on what Michael said, he doesn't think there will be any additional transformation that is required. But Git, you know, that repo would kind of tell us all we need, because a bunch of this stuff is in the artifact.
+
+00:11:56.000 --> 00:12:15.000
+Wole Babalola: And then, so that's when I brought up, uh, the issue about what the, the, uh, the provision of the account, what have they discussed? Is it gonna, even though I can see that, you know, it's an org account, but do it just one account for now to where we have separation of the different environments? And that's when, when Mike was asking me questions about, okay.
+
+00:12:15.000 --> 00:12:29.000
+Wole Babalola: what are the key factors that we use to determine, you know what, and I told them about the things that I've said earlier as well, because I have another customer that I'm working with, and usually we have to do a need assessment, primarily on.
+
+00:12:29.000 --> 00:12:44.000
+Wole Babalola: the compliance and auditing to where, you know, the security team does enforces that, you know, the accounts cannot be, uh, they cannot be together. So, then that's when he said, well, we will reach out to you, and we will align on, you know, best guidance.
+
+00:12:44.000 --> 00:12:53.000
+Wole Babalola: But, you know, whatever we provide for them as the guidance, it will be okay. So that is pretty much, but it went well.
+
+00:12:53.000 --> 00:13:11.000
+Wole Babalola: So it's a matter of them just giving us access now. I know some people may not have access to the Git, to the repo, but that's where most of the artifacts are for us to… because there's no KT, right? We've not… there's no knowledge transfer, nobody say, hey, you know what?
+
+00:12:54.000 --> 00:12:56.000
+Brendan Owens: Okay.
+
+00:13:11.000 --> 00:13:23.000
+Wole Babalola: This is what we build. This is how we build. This is literally self-service. You have to go into the repo and just trying to see what makes sense.
+
+00:13:22.000 --> 00:13:29.000
+Brendan Owens: When Rashab's back next week, I can set up time with you all and him to have you walk through the app.
+
+00:13:26.000 --> 00:13:44.000
+Wole Babalola: Yeah, I think it's, I think it's, yeah, it's, uh, it's, it's important. So we are lying on, you know, what the customer is telling us and, but I mean, he's got a bunch, a lot of artifacts in there. So one of the questions that I also want to see from RBAC perspective, do we take, so when I'm doing a POC, a quick POC.
+
+00:13:44.000 --> 00:13:59.000
+Wole Babalola: Compared to when I'm going to production, I mean, which, which one is the gold standard? Which one am I using? Am I using the definition on the RBAC or there's a different expectation from the customer from a functional role and access role perspective. So all of those things are still gray area. So.
+
+00:13:59.000 --> 00:14:02.000
+Wole Babalola: I don't want to make an assumption, but it will be very helpful.
+
+00:14:02.000 --> 00:14:07.000
+Wole Babalola: You know, when he's back to just at least give us a very high level of what he's done.
+
+00:14:07.000 --> 00:14:15.000
+Wole Babalola: You know, so we'll feel comfortable when we're having a conversation with the customer. But so far, they seem to be very pleasant people to work with.
+
+00:14:15.000 --> 00:14:23.000
+Brendan Owens: Okay, great. I'll… I'll… I'll do that right now. I'm finding… I'm finding some time for all of us to, uh…
+
+00:14:23.000 --> 00:14:25.000
+Brendan Owens: Um…
+
+00:14:28.000 --> 00:14:31.000
+Brendan Owens: Connect, and just go over the app.
+
+00:14:28.000 --> 00:14:30.000
+Luis Villavicencio: So.
+
+00:14:31.000 --> 00:14:41.000
+Luis Villavicencio: Yeah, that would be a good idea. So if my understanding is correct, this is a brand new Snowflake account setup that we are starting, right?
+
+00:14:40.000 --> 00:14:42.000
+Brendan Owens: Correct, correct.
+
+00:14:40.000 --> 00:14:42.000
+Wole Babalola: Mm-hmm. Yes.
+
+00:14:41.000 --> 00:14:54.000
+Luis Villavicencio: Well, we are saying that we don't know exactly what the airbag structure is going to look like, and we don't know what the architecture is going to look like. Is that correct?
+
+00:14:54.000 --> 00:15:09.000
+Wole Babalola: Uh, well, to a certain degree, what I'm saying is alignment, right? If I go into repo, if I go into Git right now, I can see all the RBAC that were created, I can see all the, you know, access roles that were created for…
+
+00:15:09.000 --> 00:15:19.000
+Wole Babalola: what he has on his machine. But the question is, is that a true… is that what we're taking? Are we replicating that? Or we need to have a conversation with the customer and say, hey, you know what?
+
+00:15:19.000 --> 00:15:30.000
+Wole Babalola: you know, this… do we need to create… who else has to have access to this environment? Or what he created is what we have to follow and mimic. Is… does that make sense?
+
+00:15:28.000 --> 00:15:31.000
+Luis Villavicencio: Okay, okay. Yeah.
+
+00:15:29.000 --> 00:15:43.000
+Brendan Owens: It should be… for RBAC, yeah, for RBAC, that's a conversation with Michael, the customer, to have, and there's only… we're only contracted to do 5 rolls, so don't do any more than that.
+
+00:15:36.000 --> 00:15:37.000
+Wole Babalola: Mmhm.
+
+00:15:43.000 --> 00:15:45.000
+Brendan Owens: Um…
+
+00:15:44.000 --> 00:15:45.000
+Luis Villavicencio: So, um…
+
+00:15:45.000 --> 00:15:47.000
+Brendan Owens: For everything else.
+
+00:15:47.000 --> 00:15:56.000
+Brendan Owens: take the app as is. Like, no edits. Like, no edits and no customer input. So, like, platform piece, like, RBAC and the setup.
+
+00:15:56.000 --> 00:16:04.000
+Brendan Owens: yes, the customers have some inputs there on how we do it. Everything else should be taken as is from the app.
+
+00:16:04.000 --> 00:16:08.000
+Luis Villavicencio: So this is my rate.
+
+00:16:08.000 --> 00:16:11.000
+Luis Villavicencio: We're going to discuss with the customer about that.
+
+00:16:11.000 --> 00:16:13.000
+Luis Villavicencio: uh…
+
+00:16:13.000 --> 00:16:20.000
+Luis Villavicencio: in order to define what the airbag is going to be and the architecture. Now we're saying we have five… we…
+
+00:16:20.000 --> 00:16:27.000
+Luis Villavicencio: We should create no more than five roles for the airbag. So, but you know, you guys know.
+
+00:16:27.000 --> 00:16:30.000
+Luis Villavicencio: Fire browser won't be enough.
+
+00:16:30.000 --> 00:16:33.000
+Brendan Owens: It's just an MVP. It's just an MVP.
+
+00:16:30.000 --> 00:16:31.000
+Luis Villavicencio: Okay.
+
+00:16:32.000 --> 00:16:33.000
+Luis Villavicencio: Okay.
+
+00:16:33.000 --> 00:16:35.000
+Luis Villavicencio: Okay, so…
+
+00:16:33.000 --> 00:16:35.000
+Wole Babalola: So.
+
+00:16:34.000 --> 00:16:39.000
+Brendan Owens: So, like, it's… it's bare minimum. That's why there's only 5 rolls.
+
+00:16:37.000 --> 00:16:41.000
+Luis Villavicencio: No, no, what I'm saying is that, okay.
+
+00:16:40.000 --> 00:16:42.000
+Wole Babalola: I see where you're going.
+
+00:16:41.000 --> 00:16:56.000
+Luis Villavicencio: Well, maybe you can explain this better than me, but if we go with functional roles and all that kind of standard airbag architecture, we won't have enough roles to…
+
+00:16:54.000 --> 00:17:02.000
+Brendan Owens: It's not like scripture like that. Like user group roles is what I mean. Like user roles.
+
+00:16:57.000 --> 00:16:59.000
+Luis Villavicencio: Mm-hmm.
+
+00:17:01.000 --> 00:17:05.000
+Wole Babalola: Yeah, like business persona. I think that's maybe that.
+
+00:17:03.000 --> 00:17:06.000
+Brendan Owens: Yeah, 5 business personas.
+
+00:17:03.000 --> 00:17:05.000
+Luis Villavicencio: Oh, okay.
+
+00:17:05.000 --> 00:17:08.000
+Wole Babalola: Yeah, yeah, personas. Yeah, not, uh…
+
+00:17:06.000 --> 00:17:10.000
+Brendan Owens: Yeah, create as many functional roles as you need to.
+
+00:17:08.000 --> 00:17:23.000
+Wole Babalola: Yeah, not functional, because you, me, Sharanya, that's how you say Sharanya? Sharanya, okay, alright, yes, so that's what I said, I see where you're going, but from the persona, yeah, from the business perspective, yes.
+
+00:17:14.000 --> 00:17:16.000
+Sharanya Krishnamurthi: Yeah, Sharanya, yep.
+
+00:17:23.000 --> 00:17:30.000
+Wole Babalola: Yeah, I think that's problem. Yeah, yeah, yeah, yeah, yeah. Oh, yeah, for sure. Is there already 5 people on this call?
+
+00:17:24.000 --> 00:17:26.000
+Luis Villavicencio: Okay, I see. Okay, that's better. Okay.
+
+00:17:29.000 --> 00:17:30.000
+Sharanya Krishnamurthi: Okay.
+
+00:17:30.000 --> 00:17:31.000
+Sharanya Krishnamurthi: Okay.
+
+00:17:31.000 --> 00:17:32.000
+Brendan Owens: No.
+
+00:17:33.000 --> 00:17:43.000
+William Lin | Snowflake: Sorry, I got stuck in another business meeting. So you say, what I capture you, what you're saying is, we just leave the app as it is, no addition to it.
+
+00:17:33.000 --> 00:17:35.000
+Brendan Owens: So…
+
+00:17:34.000 --> 00:17:36.000
+Wole Babalola: Sure.
+
+00:17:42.000 --> 00:17:52.000
+Brendan Owens: Correct. Correct. And the app… so, Rashab's out, he owns the app, but I set up time with us and him on the 14th to review the app.
+
+00:17:44.000 --> 00:17:45.000
+William Lin | Snowflake: And we…
+
+00:17:52.000 --> 00:17:53.000
+William Lin | Snowflake: Okay.
+
+00:17:52.000 --> 00:17:54.000
+Brendan Owens: Um…
+
+00:17:54.000 --> 00:18:06.000
+Brendan Owens: What we'll do is, when he's back, get you all access, because I know that's outstanding. And then this is the team to work on platform, the ML piece, and William, you'll be in charge of deploying the app.
+
+00:18:06.000 --> 00:18:07.000
+William Lin | Snowflake: Mmhm.
+
+00:18:06.000 --> 00:18:08.000
+Brendan Owens: Um…
+
+00:18:08.000 --> 00:18:11.000
+Brendan Owens: I'll… I'm temporarily the SDM.
+
+00:18:11.000 --> 00:18:18.000
+Brendan Owens: We're gonna get a full-time SCM to manage this, so when that person's here, we'll get them.
+
+00:18:18.000 --> 00:18:32.000
+Brendan Owens: engaged, and have them work with you all to help coordinate with the customer. But William, Sharanya, Luis, you all will start next week, while Wole works this week on, kind of, the platform pieces.
+
+00:18:34.000 --> 00:18:42.000
+Brendan Owens: That's all I had. Any other questions from the team while we're here on the engagement or kind of anything?
+
+00:18:41.000 --> 00:18:45.000
+William Lin | Snowflake: Can I get the meeting transcript from you after?
+
+00:18:42.000 --> 00:18:43.000
+Wole Babalola: Oh.
+
+00:18:45.000 --> 00:18:47.000
+Brendan Owens: Yeah, yeah, no problem.
+
+00:18:47.000 --> 00:18:50.000
+Wole Babalola: Yeah, so I have a question.
+
+00:18:50.000 --> 00:19:06.000
+Wole Babalola: Of when, I know right now they still, there's still some dependency, but regardless of how we, you want two or three accounts, right? The primary one is the dev account, right? They can provision that. And so do we have an ETA of when we will have access to the environment?
+
+00:19:06.000 --> 00:19:16.000
+Wole Babalola: And secondly, who, so who owns that? So, and what are the reason why I'm asking that question is, okay, so let's say tomorrow, right now, we still don't have access.
+
+00:19:16.000 --> 00:19:30.000
+Wole Babalola: we can just work directly with Michael, or who's responsible for making sure that, you know… I know they're asking for us to use some information about you, uh, email address and whatnot, but I just need to kind of have an ATA, because we don't have access, we can't do anything.
+
+00:19:30.000 --> 00:19:32.000
+Brendan Owens: Um…
+
+00:19:32.000 --> 00:19:42.000
+Brendan Owens: Let me just follow up on that, I don't have one right now. Michael's in charge of that, so if you need to do work, and you can't do it yet, just ping Michael and have him do it for you.
+
+00:19:33.000 --> 00:19:35.000
+Wole Babalola: Okay.
+
+00:19:42.000 --> 00:19:47.000
+Brendan Owens: Otherwise, I'll send a follow up on the access.
+
+00:19:46.000 --> 00:20:02.000
+Wole Babalola: Okay, yeah, okay, yeah, that would be nice. So at least the whole team knows we have access. It's just a matter of when we have a time for working on milestones and deliverables. Okay, all right, and then I'll send a follow-up email to Michael.
+
+00:20:02.000 --> 00:20:11.000
+Wole Babalola: based on the conversation that we had about, you know, the account setup. And I will keep you, I will keep you in copy as well, Brendan.
+
+00:20:19.000 --> 00:20:23.000
+Brendan Owens: That's all I had, and I'll share with you all the transcript, and we can go from there.
+
+00:20:26.000 --> 00:20:27.000
+Sharanya Krishnamurthi: Okay.
+
