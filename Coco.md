@@ -68,4 +68,8 @@ Always keep codes and reports updated, clean, neat, and efficient.
 Do NOT return Hallucinations or OUTDATED info.
 Always let me know if you have any concerns.
 
+# Todo
+
+- /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/ref/20260915_MeetingNoteFromWole.md
+
 # END
