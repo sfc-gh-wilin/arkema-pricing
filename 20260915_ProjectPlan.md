@@ -14,6 +14,33 @@ No Snowflake account was queried for this plan (local-file research only, per in
 
 ---
 
+## Glossary
+
+Plain-language definitions of terms used in this doc. Skip if already familiar.
+
+| Term | Meaning |
+|---|---|
+| **BOM** | Bill of Materials — the recipe for a finished product: which raw materials/components go into it, and in what quantity. Used here to calculate the true material cost of a product (`arc/ddl` files, `app_requirements/.../data-guide.md`). |
+| **ZFSC07** | An SAP-sourced table name (custom SAP report code, prefix `Z` = customer-built). It holds **standard cost** data per material/plant/period. In this app it lands as `RAW.NLC2_ZFSC07` and feeds the "standard cost" side of margin calculations. Not a generic term — it's specific to Arkema's SAP system. |
+| **NLC2** | Internal project/dataset code name used throughout table and file names (e.g. `NLC2_SALES`, `NLC2_BOM_FLAT`). Refers to the specific product line/business unit this MVP was built for (Bostik C&C Silicones). |
+| **FP** | Finished Product — the sellable end-item (as opposed to a raw material or component). |
+| **MOVC** | Moving Cost / cost simulation logic — the stored procedure `SP_SIMULATE_MOVC` computes simulated material cost changes when a price scenario runs. |
+| **DAMPE** | Another SAP-sourced table/feed — holds **future/forecast price** data (as opposed to ZFSC07's standard cost). Used as the top tier of the price-source waterfall. |
+| **WAC** | Weighted Average Cost — a blended cost figure (e.g. `FG_WAC` = Finished Good Weighted Average Cost). |
+| **MARM** | An SAP table for Unit of Measure (UOM) conversions (e.g. converting KG to PC, or TO to KG) — needed because different source files use different units for the same material. |
+| **RBAC** | Role-Based Access Control — who is allowed to see or do what, based on their assigned role (here, one of the app's "personas": e.g. Commercial, FP&A, Pricing, Steward). |
+| **SSO/SCIM** | Single Sign-On / System for Cross-domain Identity Management — lets Arkema employees log in with their existing corporate credentials, and lets Snowflake automatically provision/deprovision their accounts. |
+| **UAT** | User Acceptance Testing — the customer (Arkema) tests the finished app/model against real use cases and formally signs off that it works. |
+| **SPCS** | Snowpark Container Services — Snowflake's way of running a Docker container (like this app's FastAPI backend + React frontend) directly inside Snowflake's infrastructure. This is the current, contracted deployment target. |
+| **SAR** | Snowflake App Runtime — a newer, different Snowflake mechanism for running web apps. Not what this app is built for today, and not in the signed contract (see §6). |
+| **Cortex Analyst / Cortex Search / Cortex Agent** | Snowflake's built-in AI features: Cortex Analyst answers natural-language questions against structured data; Cortex Search does document/text search; Cortex Agent is the orchestrator that combines both to power the app's "Ask ARC" chat feature. |
+| **Elasticity (β / beta)** | An economics term measuring how much sales volume changes when price changes (e.g. β = -1.0 means a 1% price increase causes roughly a 1% volume drop). Used by the ML model to recommend prices without losing too many customers. |
+| **LOE** | Level of Effort — the estimated hours/days budgeted for a piece of work in the contract. |
+| **DRI** | Directly Responsible Individual — the one person accountable for a specific task or decision. |
+| **RACI** | A responsibility-assignment chart: **R**esponsible (does the work), **A**ccountable (owns the outcome), **C**onsulted (asked for input), **I**nformed (kept up to date). |
+
+---
+
 ## 1. Engagement Context
 
 | Item | Detail |
@@ -104,7 +131,7 @@ Per contract LOE line items, re-sequenced by the audit's chokepoint analysis whe
 | LOE item | Budgeted | Action |
 |---|---|---|
 | M3-01 SPCS Setup & Deploy | 8h | Image repo, compute pool, service spec, pinned image, repeatable deploy + rollback script (currently `scale/arc/deploy.sh` is a stub `TODO`) |
-| M3-02 RBAC Wiring | 0h* (audit: needs 11h min) | Bind the 5 production roles to server-side authorization; remove the browser-claimed persona header as the sole gate. **Flag as change-order risk — budgeted at 0.** |
+| M3-02 RBAC Wiring | 0h* (audit: needs 11h min) | **What "M3-02" is:** LOE line item #2 under Milestone 3 (App Productionalization) in the signed proposal deck (Slide 16, "LOE Breakdown M3"). Its description there: *"Bind 5 roles to server-side authorization. Role drives screen access. Remove browser-claimed persona. Audit events."* This is the exact fix for the audit's #1 blocker (§3.1, item 1: persona is just a client header today, e.g. `App.tsx`, `arc/backend/api/main.py` `PERSONA_PERMS`). **Flag as change-order risk — budgeted at 0 hours in the contract.** |
 | M3-04 Write Path Hardening | 16h | Saved scenarios, price-increase assumptions, transaction boundaries, idempotent re-runs |
 | M3-05 Error Handling & Observability | 12h | Stop returning empty-as-success on failed queries; add loading/empty/error/unauthorized UI states; parameterize the highest-risk SQL call sites |
 | Misc. Fixes | 28h | Contingency bucket — prioritize by risk, not by convenience |
@@ -158,7 +185,9 @@ You noted a preference to push the app to **SAR (Snowflake App Runtime)**. Flagg
 2. Which database is the real production target — `ARKEMA_PRICING_DB` or `ARKEMA_PRICING_DB_SCALE`? Neither is fully created by the current scripts.
 3. Has this app ever actually been run end-to-end against a freshly built (non-synthetic) database? (Andrew's audit suggests no.)
 4. Given M3-02 (entitlement enforcement) is budgeted at 0 hours but is the top blocker in the audit — how should this be resourced? Is a change order expected here?
-5. Does Arkema (the customer) know the specific pricing/margin numbers currently shown by the app are not reliable (audit Pass 3)? Is "deploy as-is" intended to cover shipping those numbers unchanged, or is there tolerance to fix the clearly-broken arithmetic (e.g., the beta-clamp bug that disables the ML model's influence entirely) within "productionalization" rather than "new feature"?
+5. Does Arkema (the customer) know the specific pricing/margin numbers currently shown by the app are not reliable (audit Pass 3)? Is "deploy as-is" intended to cover shipping those numbers unchanged, or is there tolerance to fix the clearly-broken arithmetic (e.g., the beta-clamp bug that disables the ML model's influence entirely — see code location below) within "productionalization" rather than "new feature"?
+   - **Where to find this in the code:** `arkema-pricing-ss/arc/ddl/014_nlc2_agent_recommend.sql`. The elasticity gate is `if beta < -1.0:` (line 48), right below where `beta` is clamped to a floor of exactly `-1.0` by the `shrink_beta()` function (line 33). Because the clamp's output can never be *less than* `-1.0`, the `<` condition on line 48 can never be true, so the code path that uses the ML elasticity (`p_unc`, line 49) never executes.
+   - **Where the "not reliable" numbers surface in the UI:** the margin/recommendation screens driven by `arc/backend/services/nlc2_service.py` (reads `ML.NLC2_ELASTICITY`, line ~396) and the stored procedure `SP_BUILD_RECOMMENDATIONS` referenced in `arc/docs/ARCHITECTURE.md`.
 6. Is real ZFSC07 (BOM) data available yet to test the 144× fan-out risk before UAT starts?
 7. Confirm target go-live date and whether Week 5 Platform Foundation milestone (Snowpipe for 12 tables) is on track — App workstream cannot connect to production data until that lands.
 8. Raise SAR vs. SPCS explicitly (§6) and get a documented decision either way.
