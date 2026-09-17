@@ -1,0 +1,1190 @@
+WEBVTT
+
+00:00:53.000 --> 00:00:55.000
+William Lin | Snowflake: Hey, good morning.
+
+00:00:54.000 --> 00:00:57.000
+Wole Babalola: Hey, good morning, how are you?
+
+00:00:56.000 --> 00:01:01.000
+William Lin | Snowflake: You have been texting me so many times, but first time see you in person.
+
+00:01:01.000 --> 00:01:03.000
+Wole Babalola: I know, yeah.
+
+00:01:03.000 --> 00:01:08.000
+William Lin | Snowflake: So you have been working on this project with them for a week already, right?
+
+00:01:07.000 --> 00:01:10.000
+Wole Babalola: Yeah, I started last week.
+
+00:01:10.000 --> 00:01:11.000
+William Lin | Snowflake: Okay.
+
+00:01:10.000 --> 00:01:23.000
+Wole Babalola: Yeah, last week was when I started. As far as, you know, having communication with the client, yeah, last week is when it started. So you're still, you know, going through the process. We didn't really get access until…
+
+00:01:23.000 --> 00:01:33.000
+Wole Babalola: Uh, late last week, but still trying to kind of lay it on the foundation. I guess today is the first… oh, what I've been going through, I just haven't been going through what is the git.
+
+00:01:25.000 --> 00:01:26.000
+William Lin | Snowflake: Mm-hmm.
+
+00:01:33.000 --> 00:01:35.000
+William Lin | Snowflake: And…
+
+00:01:33.000 --> 00:01:36.000
+Wole Babalola: Uh, in the repo.
+
+00:01:35.000 --> 00:01:37.000
+William Lin | Snowflake: Uh-huh.
+
+00:01:36.000 --> 00:01:43.000
+Wole Babalola: you know, I guess this is… today is going to be the first day that we're actually going to kind of get an intro to the app itself.
+
+00:01:43.000 --> 00:01:50.000
+Wole Babalola: Yeah, so not much has been done, but at least we're we're making progress from, you know, trying to lay the foundation yet.
+
+00:01:47.000 --> 00:01:49.000
+William Lin | Snowflake: That's good.
+
+00:01:50.000 --> 00:01:54.000
+William Lin | Snowflake: Hey, everyone. Brendan, good to see you.
+
+00:01:53.000 --> 00:01:56.000
+Brendan Owens: Hey, William. Hey, Wyatt. Hey, Trace. Good morning.
+
+00:01:53.000 --> 00:01:55.000
+Wole Babalola: Hey, Brendan.
+
+00:01:56.000 --> 00:01:57.000
+Chase Growney: Hey, everyone. Good morning.
+
+00:01:56.000 --> 00:01:58.000
+Wole Babalola: Right.
+
+00:01:57.000 --> 00:02:02.000
+William Lin | Snowflake: Do we have a kickoff with the client meeting?
+
+00:01:58.000 --> 00:02:00.000
+Wole Babalola: Hey, Chase.
+
+00:01:58.000 --> 00:02:00.000
+Brendan Owens: boyfriend.
+
+00:02:03.000 --> 00:02:08.000
+Brendan Owens: So we started with Wolite before you all.
+
+00:02:08.000 --> 00:02:13.000
+Brendan Owens: Joined the project as soon as the stagger started. So we've already had the kickoff.
+
+00:02:12.000 --> 00:02:25.000
+William Lin | Snowflake: Cool. So, all we need is their Snowflake access. Uh, do we need any other access from them? For example, like, their Teams, their email, or whatever? Just the Snowflake is all we need for now, right?
+
+00:02:25.000 --> 00:02:31.000
+Brendan Owens: Yeah, just Snowflake for now. We'll keep communication over email and things like that.
+
+00:02:30.000 --> 00:02:33.000
+William Lin | Snowflake: Okay, cool. Thanks.
+
+00:02:35.000 --> 00:02:38.000
+Brendan Owens: Yeah, and I'll set up some time for…
+
+00:02:38.000 --> 00:02:51.000
+Brendan Owens: us as a project group to connect and talk about next steps and look at the calendar. Um, but today, once Rishabh joins, we'll just go over, uh, the app to get you all familiar with it.
+
+00:02:51.000 --> 00:02:53.000
+William Lin | Snowflake: Great, yeah.
+
+00:02:54.000 --> 00:02:56.000
+William Lin | Snowflake: We finally got hold of it.
+
+00:02:57.000 --> 00:03:00.000
+William Lin | Snowflake: Yeah, I got some questions on it too.
+
+00:03:00.000 --> 00:03:05.000
+William Lin | Snowflake: I guess we are after looking at it.
+
+00:03:01.000 --> 00:03:02.000
+Brendan Owens: Awesome.
+
+00:03:15.000 --> 00:03:22.000
+Wole Babalola: And I… yeah, there was an email. I'm not sure if you guys… okay, there was an email that came through.
+
+00:03:22.000 --> 00:03:28.000
+Wole Babalola: about the, uh, URL, the path for the S3 bucket, and, uh, storage locations.
+
+00:03:28.000 --> 00:03:46.000
+Wole Babalola: Yeah, so… yeah, I guess I will… even yesterday, you know, I sent an email yesterday just to kind of summarize the conversation that we had, you know, so… the conversation went well, and I tried to kind of lay out the next steps, and I think that's why they sent this email about the…
+
+00:03:46.000 --> 00:04:01.000
+Wole Babalola: So, one of the things that I noticed, and I called it out in my email yesterday, is because they're new to Snowflake, so even though you're trying to explain something to them, it's kind of hard for them to kind of… to visualize. So that's what I said, okay, I put… I'll put together at the high-level architecture.
+
+00:04:01.000 --> 00:04:05.000
+Wole Babalola: Also, that can also show them how…
+
+00:04:05.000 --> 00:04:07.000
+Wole Babalola: The access and data moves.
+
+00:04:07.000 --> 00:04:08.000
+William Lin | Snowflake: Mm-hmm.
+
+00:04:07.000 --> 00:04:22.000
+Wole Babalola: Because sometimes, you know, not every time that data is gonna move, right? I said it's what's gonna move when you're trying to do the promotion, even though we're not gonna touch the production environment. But for them, you see it kind of a little fuzzy, you know, when you talk about cloning, what does it mean when you say clone?
+
+00:04:22.000 --> 00:04:27.000
+Wole Babalola: When you're trying to promote asset, whether it's there to come, you know, eventually the one you go into production.
+
+00:04:27.000 --> 00:04:32.000
+Wole Babalola: Because I'm looking at what they send here, right? They send for 3, because even though we talk about.
+
+00:04:32.000 --> 00:04:42.000
+Wole Babalola: at three different, you know, logical environment, it does not mean that, you know, we will be moving data from… because UAT is just primarily for testing. So, but anyways…
+
+00:04:44.000 --> 00:04:45.000
+Brendan Owens: Okay.
+
+00:04:46.000 --> 00:04:58.000
+Brendan Owens: Very cool. We'll catch up as a project group and kind of talk about those things in more detail, just so we can get the hands-on keyboard and make sure the platform's all set up so the app team.
+
+00:04:58.000 --> 00:05:01.000
+Brendan Owens: It is good to go. Um…
+
+00:05:02.000 --> 00:05:09.000
+Brendan Owens: Hey, Rishabh. Thanks for joining. So you have the — I'm going to start recording because one member couldn't make it.
+
+00:05:03.000 --> 00:05:05.000
+Rishabh Raman: Of course.
+
+00:05:09.000 --> 00:05:20.000
+Brendan Owens: But you have the professional service project team here that's going to be working with Arkema. Wole is responsible for the platform.
+
+00:05:13.000 --> 00:05:15.000
+Rishabh Raman: Excellent.
+
+00:05:20.000 --> 00:05:28.000
+Brendan Owens: William's responsible for deploying the application, and Luis is responsible for the AI ML pieces of the app.
+
+00:05:28.000 --> 00:05:36.000
+Brendan Owens: So what I wanted to do at this time is the team had some questions about the app is for you to just walk through what you built.
+
+00:05:36.000 --> 00:05:45.000
+Brendan Owens: Uh, and kind of give them any technical guidance that you think is relevant as they go to deploy it in the customer environment.
+
+00:05:45.000 --> 00:06:03.000
+Rishabh Raman: Yeah, I would say, like, you know, the starting point should be the PRD documents. And, you know, if you actually end up starting there, you can easily correlate, like, all the functionalities and everything within that. So I would definitely start with, like, you know, that MVP bridge.
+
+00:06:03.000 --> 00:06:16.000
+Rishabh Raman: uh, document, so if you go into the docs folder in the Git repo, uh, there will be an MVP bridge, and that talks about, like, you know, uh, okay, what are, uh, some of the, some of the, uh, functionalities that we have to register within it.
+
+00:06:16.000 --> 00:06:32.000
+Rishabh Raman: Um, I think, again, uh, I would say from a functionality standpoint, uh, there are, like, you know, 14 different, uh, layers within this. And, uh, each one of them corresponds to, like, you know, a specific section within the application.
+
+00:06:32.000 --> 00:06:49.000
+Rishabh Raman: And, uh, all the data and everything is set up underneath that. Um, so, you know, from an ingestion standpoint, all the processing, um, and then set up of everything within Snowflake is all part of, like, you know, the backend. Um, and then, like, you know, there are some calculation engines.
+
+00:06:49.000 --> 00:07:05.000
+Rishabh Raman: Uh, that are being built on this. Uh, where we end up, like, you know, showing, like, okay, here is, uh, how you calculate, like, you know, bill of materials, go from, like, step by step to calculating customer margin, um, associated with it. Uh, try out different pricing scenarios.
+
+00:07:05.000 --> 00:07:21.000
+Rishabh Raman: And then, uh, also have a persona-based view in the UI, uh, where you actually have, like, you know, okay, procurement analyst, commercial manager, um, and, like, you know, different other persona… data steward, different other personas with, like, their specific task, uh.
+
+00:07:21.000 --> 00:07:27.000
+Rishabh Raman: Um, laid out in the UI. Everything is per Michael's PRD, essentially, right?
+
+00:07:27.000 --> 00:07:30.000
+Rishabh Raman: If you ask me, like, you know, it's…
+
+00:07:30.000 --> 00:07:36.000
+Rishabh Raman: is the app more complex than it should be? Yes. I would say, like, you know, it's…
+
+00:07:36.000 --> 00:07:39.000
+Rishabh Raman: There's a… there's a somewhat, like, you know.
+
+00:07:39.000 --> 00:07:49.000
+Rishabh Raman: uh, complexity that is… that is kind of built in in here, uh, but I've stuck to, like, you know, whatever Michael wanted in his PRD. Um, but it's, uh…
+
+00:07:49.000 --> 00:07:52.000
+Rishabh Raman: It's a lot more functionality than you probably need.
+
+00:07:53.000 --> 00:08:02.000
+William Lin | Snowflake: Uh, question. So the document you're talking about is under the ARC docs, uh, MVPbridge.net, right? Okay.
+
+00:08:00.000 --> 00:08:03.000
+Rishabh Raman: Yes. Yes. Yes.
+
+00:08:02.000 --> 00:08:11.000
+William Lin | Snowflake: And yeah, because I see 2 folders with codes ARC and ARC scale scale ARC.
+
+00:08:10.000 --> 00:08:27.000
+Rishabh Raman: Yeah, so scale is, like, you know, the one… so ARC is the one working on the real data. Scale is the one where we actually took that real data and turned it into, like, you know, billions of rows to show during the POC that we can actually scale to, like, you know, large amount of data.
+
+00:08:16.000 --> 00:08:18.000
+William Lin | Snowflake: Okay.
+
+00:08:27.000 --> 00:08:37.000
+Rishabh Raman: Uh, uh, when we actually end up deploying. So, ignore the scale part. It's the same application, but just, like, you know, scaled to many, many, uh, millions and billions of rows.
+
+00:08:33.000 --> 00:08:34.000
+William Lin | Snowflake: Yes.
+
+00:08:37.000 --> 00:08:39.000
+William Lin | Snowflake: I see. Cool.
+
+00:08:38.000 --> 00:08:45.000
+Rishabh Raman: Uh, we wanted to illustrate our dynamic table capabilities and all that, so we did that during the POC.
+
+00:08:45.000 --> 00:08:58.000
+Rishabh Raman: Uh, new POC data is where you're gonna see, like, you know, all the data sources, right? Like, you know, things like Forex rate, future prices, purchase, like, you know, so these are all the data coming from, uh, Arkema sources.
+
+00:08:58.000 --> 00:09:02.000
+Rishabh Raman: And, uh, like, you know, so you have, like, all of those things built in there.
+
+00:09:02.000 --> 00:09:16.000
+Rishabh Raman: Um, and then, apart from that, like, you know, uh, within the ARC, you will see, like, you know, a lot of the documents describing architecture, like, you know, how it's actually working in there. Um, then, like, um, what the…
+
+00:09:16.000 --> 00:09:31.000
+Rishabh Raman: Uh, what are some of the, uh, machine learning enhancement plan and all of that? Some of it is, like, now tabled. Uh, we don't actually have those. Um, maybe we'll end up building it, not building it. But in the new setup, you actually don't have, like, you know, a lot of those, uh.
+
+00:09:31.000 --> 00:09:33.000
+Rishabh Raman: those different things.
+
+00:09:33.000 --> 00:09:40.000
+Rishabh Raman: So we did, like, you know, machine learning work during the POC, but it doesn't have, like, you know, as part of this MVP now.
+
+00:09:42.000 --> 00:09:47.000
+Rishabh Raman: So I would say, like, you know, if you end up, like, you know, deploying the app, um…
+
+00:09:47.000 --> 00:09:49.000
+Rishabh Raman: And just running the Snowflake…
+
+00:09:49.000 --> 00:09:54.000
+Rishabh Raman: uh, setting this up in Snowflake, you'll be able to see, like, you know, how it looks like.
+
+00:09:55.000 --> 00:10:08.000
+William Lin | Snowflake: Setting this up in Snowflake, but the first thing is we need to deploy all the data sources, right? I see a lot of DDLs there. I remember I did see some steps to follow for deployment, right?
+
+00:10:08.000 --> 00:10:16.000
+Rishabh Raman: Yep. So there is, like, you know, in the DDL, you're looking at the right place. You can see, like, you know, there's an MVP folder, right?
+
+00:10:08.000 --> 00:10:09.000
+William Lin | Snowflake: Okay.
+
+00:10:15.000 --> 00:10:17.000
+William Lin | Snowflake: Yeah, oh, okay, yeah.
+
+00:10:16.000 --> 00:10:33.000
+Rishabh Raman: Yeah, so, like, you know, that's the database.sql, you have MVP contracts, right? Um, and they're all, like, you know, numbered in there, uh, so that's how you go from, like, you know, bronze, silver, gold, uh, layering, all of that. And, uh, then there are, like, you know, specific functionality calculated.
+
+00:10:21.000 --> 00:10:22.000
+William Lin | Snowflake: Okay.
+
+00:10:33.000 --> 00:10:38.000
+Rishabh Raman: Uh, within that, uh, so that's how you, uh, that's how you end up, like, you know, setting it up.
+
+00:10:38.000 --> 00:10:40.000
+Rishabh Raman: um.
+
+00:10:40.000 --> 00:10:43.000
+Rishabh Raman: And, you know, I could also, like, you know, just…
+
+00:10:43.000 --> 00:10:48.000
+Rishabh Raman: maybe give you, like, you know, one script to deploy kind of a setup. Um…
+
+00:10:47.000 --> 00:10:48.000
+William Lin | Snowflake: Sure.
+
+00:10:48.000 --> 00:10:56.000
+Rishabh Raman: Yeah, so… let me add that one script to deploy, and, like, you know, because all of that you can run in, like, you know, single script.
+
+00:10:56.000 --> 00:11:03.000
+William Lin | Snowflake: Great. You do have access to that new repo, right, in the Snowflake solutions?
+
+00:11:03.000 --> 00:11:04.000
+Rishabh Raman: I do.
+
+00:11:03.000 --> 00:11:06.000
+William Lin | Snowflake: Okay, cool. So you can just update that repo.
+
+00:11:04.000 --> 00:11:06.000
+Rishabh Raman: But…
+
+00:11:06.000 --> 00:11:14.000
+Rishabh Raman: But I'll update in my repo, just clone the latest one. Like, you know, I added a few more things last night, too.
+
+00:11:12.000 --> 00:11:15.000
+William Lin | Snowflake: Oh, okay, yeah.
+
+00:11:14.000 --> 00:11:21.000
+Rishabh Raman: Yeah, so just clone the latest one, and pull that into the Snowflake solutions.
+
+00:11:16.000 --> 00:11:17.000
+William Lin | Snowflake: Okay.
+
+00:11:20.000 --> 00:11:21.000
+William Lin | Snowflake: Okay.
+
+00:11:21.000 --> 00:11:31.000
+Rishabh Raman: Um, and uh, you know, in the Snowflake Solutions one, you might want to… you might want to remove the scale, uh, because you don't really need that folder, right? Um…
+
+00:11:29.000 --> 00:11:30.000
+William Lin | Snowflake: Okay.
+
+00:11:31.000 --> 00:11:47.000
+Rishabh Raman: I don't know if you need app requirements, you can keep it, right? Uh, so app requirements, again, like, you know, uh, essentially has, like, a lot of, uh, information about, um, you know, different versions of what they said. This has gone through a lot of versions, okay?
+
+00:11:47.000 --> 00:12:02.000
+Rishabh Raman: So, like, you know, you started, like, at a POC version, then there was a PRD corresponding to, like, you know, okay, improvement on the POC version, then there was another PRD on it with, like, improvements on that version, and now we have a PRD on, like, you know, building this MVP.
+
+00:12:02.000 --> 00:12:08.000
+Rishabh Raman: So it has gone through, like, a lot of different versions. So it's easier to get lost in, like, you know, different versions of this application.
+
+00:12:04.000 --> 00:12:05.000
+William Lin | Snowflake: Mmhm.
+
+00:12:08.000 --> 00:12:09.000
+William Lin | Snowflake: Uh-huh.
+
+00:12:09.000 --> 00:12:14.000
+William Lin | Snowflake: And all these are inside that app requirements folder.
+
+00:12:12.000 --> 00:12:21.000
+Rishabh Raman: Yes, yes. So I would… instead of going through that whole chain of requirements, let's just look at MVP, because, like, it's already on there, right?
+
+00:12:20.000 --> 00:12:21.000
+William Lin | Snowflake: Oh.
+
+00:12:21.000 --> 00:12:23.000
+William Lin | Snowflake: That's great.
+
+00:12:22.000 --> 00:12:23.000
+Luis Villavicencio: Okay.
+
+00:12:23.000 --> 00:12:27.000
+Wole Babalola: So I have a a question. So.
+
+00:12:25.000 --> 00:12:27.000
+Rishabh Raman: Yep.
+
+00:12:27.000 --> 00:12:30.000
+Wole Babalola: From the platform setup, uh, itself.
+
+00:12:30.000 --> 00:12:50.000
+Wole Babalola: Because I knew I was going through, you know, some of this stuff in this repo, and I noticed from the RBAC perspective, there's some scripts there, the warehouses and stuff. Is the… is the… is it a safe assumption? Is the expectation here, like, it's just a lift and shift, even though you actually have to do deployment, that all that's been defined with the, uh.
+
+00:12:41.000 --> 00:12:42.000
+Rishabh Raman: Thank you.
+
+00:12:50.000 --> 00:13:04.000
+Wole Babalola: with the, uh, with the customer, or they're still, uh, I still need to reach out to them, understand what are the roles. From the business perspective, all, uh, we still need to establish a separate functional roles from what is in the repo here.
+
+00:13:04.000 --> 00:13:06.000
+Wole Babalola: There's a mixing.
+
+00:13:04.000 --> 00:13:13.000
+Rishabh Raman: I mean, yes, it makes sense. So, uh, you know, from what I understand, like, you know, the way, um…
+
+00:13:13.000 --> 00:13:31.000
+Rishabh Raman: RBAC and all of those things are set up is based on, like, you know, specific persona, right? Um, like, for example, uh, in the, um, in the, in the front end, like, you know, they have, like, you know, different roles defined, right? Um, someone who is a commercial manager, data steward, pricing analyst, like, you know, things like that.
+
+00:13:31.000 --> 00:13:39.000
+Rishabh Raman: Right? So, I use, like, you know, some of those elements to essentially, um, you know, create that.
+
+00:13:39.000 --> 00:13:52.000
+Rishabh Raman: I don't think we should… we should go beyond that, because it might create, like, you know, more… more work for us, uh, if you ask that question. Like, you know, they may say, like, you know, yeah, let's have, like, you know, very extensive RBAC, right? Um…
+
+00:13:52.000 --> 00:13:57.000
+Rishabh Raman: So it might almost be like, you know, you'll be creating a lot more work for you by asking that question.
+
+00:13:57.000 --> 00:14:13.000
+Wole Babalola: Okay. So, so essentially, we can use this as a baseline. So what I'm saying right now is, so let's say I take this document as is, and I deploy as is, we're good enough, right? Because there's alignment between us and their client to say, okay, you know what, this is at least the baseline.
+
+00:14:05.000 --> 00:14:06.000
+Rishabh Raman: Yes.
+
+00:14:08.000 --> 00:14:09.000
+Rishabh Raman: Mm-hmm.
+
+00:14:13.000 --> 00:14:14.000
+Rishabh Raman: Absolutely.
+
+00:14:13.000 --> 00:14:15.000
+Wole Babalola: So there's no need to. Okay, alright.
+
+00:14:14.000 --> 00:14:16.000
+Rishabh Raman: Absolutely.
+
+00:14:15.000 --> 00:14:17.000
+Wole Babalola: Yeah.
+
+00:14:16.000 --> 00:14:20.000
+Rishabh Raman: Do refer to this documentation.
+
+00:14:27.000 --> 00:14:30.000
+Luis Villavicencio: So, for the ML part.
+
+00:14:30.000 --> 00:14:35.000
+Luis Villavicencio: Can you please just introduce me? I'm just reading the code to understand.
+
+00:14:33.000 --> 00:14:35.000
+Rishabh Raman: No ML part.
+
+00:14:35.000 --> 00:14:36.000
+Rishabh Raman: There's no machine learning.
+
+00:14:36.000 --> 00:14:38.000
+Luis Villavicencio: There is no machine learning.
+
+00:14:37.000 --> 00:14:39.000
+Rishabh Raman: No.
+
+00:14:38.000 --> 00:14:42.000
+Luis Villavicencio: Okay, but I see some fast for training.
+
+00:14:41.000 --> 00:14:51.000
+Rishabh Raman: That's… that was in the POC. There's a separate version of it. Now, the new MVP that, like, you know, uh, that we've built in, there's zero machine learning.
+
+00:14:42.000 --> 00:14:43.000
+Luis Villavicencio: Probably I…
+
+00:14:44.000 --> 00:14:46.000
+Luis Villavicencio: Yeah, okay.
+
+00:14:51.000 --> 00:14:58.000
+Rishabh Raman: That's per Michael. Like, I had kept it in POC. Uh, the new PRD wrote, there's no machine learning in it.
+
+00:14:58.000 --> 00:15:00.000
+Brendan Owens: When did that happen?
+
+00:15:01.000 --> 00:15:03.000
+Rishabh Raman: Sorry?
+
+00:15:02.000 --> 00:15:05.000
+Brendan Owens: When did that happen? Like, when did he…
+
+00:15:03.000 --> 00:15:10.000
+Rishabh Raman: More… more than… more than a month ago. Like, the original… the PRD that he gave, there is no machine learning.
+
+00:15:11.000 --> 00:15:14.000
+Chase Growney: Yeah, do you think, yeah.
+
+00:15:14.000 --> 00:15:20.000
+Chase Growney: Because when you brought up re-adding the machine learning, it sounded like he was…
+
+00:15:21.000 --> 00:15:26.000
+Chase Growney: It sounded like he wanted it. Like he sort of wanted those, those, okay.
+
+00:15:23.000 --> 00:15:37.000
+Rishabh Raman: No, no, he did… no, he… no, he didn't… he didn't say that. He didn't say that. I asked him very explicitly. And, like, you know, uh, so the PRD that was also given to PHData, right? That also didn't have any machine learning. It's the same PRD.
+
+00:15:37.000 --> 00:15:41.000
+Rishabh Raman: Like, you know, you can go in and read that. There's no machine learning in it.
+
+00:15:38.000 --> 00:15:39.000
+Chase Growney: Right.
+
+00:15:40.000 --> 00:15:47.000
+Chase Growney: And the machine learning that was added originally, it was just those, like, guardrails where the system would say.
+
+00:15:40.000 --> 00:15:42.000
+William Lin | Snowflake: Uh, okay.
+
+00:15:45.000 --> 00:15:49.000
+Rishabh Raman: Never came from Michael. But it never came from Michael.
+
+00:15:47.000 --> 00:15:49.000
+Chase Growney: No, no, no, I'm…
+
+00:15:49.000 --> 00:15:55.000
+Chase Growney: Right. Well, he talked about it a little bit, saying that there were recommendations that were saying price increases of like 77%.
+
+00:15:53.000 --> 00:15:55.000
+Rishabh Raman: Not…
+
+00:15:55.000 --> 00:16:01.000
+Rishabh Raman: But that was added by me, like, you know, during the POC. It never came from him.
+
+00:15:58.000 --> 00:15:59.000
+Chase Growney: Right.
+
+00:15:59.000 --> 00:16:00.000
+Chase Growney: Yep.
+
+00:16:01.000 --> 00:16:02.000
+Chase Growney: Right.
+
+00:16:02.000 --> 00:16:08.000
+William Lin | Snowflake: Okay, no machine learning. What about AI functions like AI complete or AI whatever?
+
+00:16:07.000 --> 00:16:23.000
+Rishabh Raman: All built in Cortex, like, you know, already in there. So this is like, you know, again, Cortex agents that are defined for it. And again, like, you know, the PRD talks very generically about it, right? So it did not define, like, you know, anything specific.
+
+00:16:23.000 --> 00:16:41.000
+Rishabh Raman: Uh, but I made it very comprehensive, like, you know, there are, like, you know, semantic views, I've set it up. Everything exists at the code layer level, right? So, uh, you know, it doesn't… that doesn't touch, like, you know, uh, databases beyond that. Uh, so everything, like, you know, uh, works off the code layer level, uh, all the semantic view and everything.
+
+00:16:30.000 --> 00:16:32.000
+William Lin | Snowflake: Okay.
+
+00:16:41.000 --> 00:16:57.000
+Rishabh Raman: PRD did even say, like, you know, the what-if engine and everything should actually correspond to Cortex Agent. So I did build it for that. You know, the POC version. In fact, like, you know, the more I ended up building it, I ended up realizing, Chase.
+
+00:16:57.000 --> 00:17:02.000
+Rishabh Raman: The POC version was way more extensive than this. This is the irony of this.
+
+00:17:03.000 --> 00:17:05.000
+Chase Growney: That's interesting.
+
+00:17:04.000 --> 00:17:14.000
+Rishabh Raman: like, machine learning is gone, what-if engine, and, like, everything that we were showing, like, you know, in agent actually doing, that's all gone, okay? Like, you know, it was surprised.
+
+00:17:13.000 --> 00:17:17.000
+Chase Growney: This was stripped out of the PRD is what you're saying.
+
+00:17:15.000 --> 00:17:26.000
+Rishabh Raman: Yeah, yeah, it was all, it was all, like, removed from it, and all that was added to it was, like, you know, click this on the UI, click that on the UI, click this on this thing, like, you know.
+
+00:17:25.000 --> 00:17:30.000
+Chase Growney: I wonder if Michael realizes that because I feel like Mike. Yeah.
+
+00:17:27.000 --> 00:17:34.000
+Rishabh Raman: I don't know. I mean… I mean, using this UI, I highly doubt, like, you know, this makes anything easier.
+
+00:17:34.000 --> 00:17:44.000
+Rishabh Raman: Like, you know, this is, like, extensive UI building, which is why it, like, you know, took me longer just to, like, you know, get the button here, get the button there, like, you know, do this.
+
+00:17:38.000 --> 00:17:39.000
+Chase Growney: Right.
+
+00:17:44.000 --> 00:17:47.000
+Rishabh Raman: I mean, it's not really gen AI.
+
+00:17:47.000 --> 00:17:55.000
+Chase Growney: And the thing is, the UI is probably going to evolve because it's just Michael's idea. It didn't have…
+
+00:17:53.000 --> 00:18:06.000
+Rishabh Raman: I mean, is that… I mean, has the… and from a sales perspective, I want you to think about this. Has he actually gone and talked to, like, you know, commercial man… you remember Raja, that we actually met with?
+
+00:18:03.000 --> 00:18:04.000
+Chase Growney: Yeah.
+
+00:18:05.000 --> 00:18:06.000
+Chase Growney: Yep.
+
+00:18:06.000 --> 00:18:07.000
+Chase Growney: Mm-hmm.
+
+00:18:06.000 --> 00:18:14.000
+Rishabh Raman: Like, you know, his one comment was, like, you know, we do this in Excel today, like, you know, what's the difference here? Like, you know, when you have to click through so many things.
+
+00:18:12.000 --> 00:18:13.000
+Chase Growney: Right.
+
+00:18:14.000 --> 00:18:20.000
+Rishabh Raman: Whatever we are clicking through during the POC, we are clicking through, like, 3 times more here.
+
+00:18:21.000 --> 00:18:22.000
+Chase Growney: Yep.
+
+00:18:23.000 --> 00:18:27.000
+Rishabh Raman: So it's… so I'm… so I'm not so sure it's ease of.
+
+00:18:23.000 --> 00:18:25.000
+Luis Villavicencio: So, so.
+
+00:18:25.000 --> 00:18:32.000
+Chase Growney: I mean, so this is… so this is… I mean, so the way I see, like, the… so we just made the PRD available to Michael.
+
+00:18:32.000 --> 00:18:40.000
+Chase Growney: Um, and at some point… or not the PRD, the, um… the Git repo, right? Uh, or we're in the process of making that available.
+
+00:18:37.000 --> 00:18:38.000
+Rishabh Raman: Yep.
+
+00:18:40.000 --> 00:18:58.000
+Chase Growney: I think at that point he's gonna have, like, he wants to go through extensive UAT, which is why he wants to start now, right? That's why he's asking for, you know, access. Maybe not, whatever. He wants to show other members of the team to start validating calculations and so on.
+
+00:18:58.000 --> 00:18:59.000
+Chase Growney: Um…
+
+00:19:00.000 --> 00:19:10.000
+Chase Growney: you know, I think that this is… is he gonna have… when is he gonna have access to, like, a test environment of the app? I know we talked about UAT not being until middle of October.
+
+00:19:10.000 --> 00:19:16.000
+Chase Growney: Is it… is it possible to… to fast track that so it ends up happening in, like.
+
+00:19:16.000 --> 00:19:17.000
+Chase Growney: Uh, beginning of October.
+
+00:19:19.000 --> 00:19:29.000
+Brendan Owens: Um, we'll have to look at the schedule. Like, UAT still won't be until middle of October. He could… Michael, in limited capacity, could have a test.
+
+00:19:24.000 --> 00:19:26.000
+Chase Growney: Okay.
+
+00:19:29.000 --> 00:19:31.000
+Chase Growney: Yeah.
+
+00:19:30.000 --> 00:19:32.000
+Brendan Owens: Version of the app sooner.
+
+00:19:32.000 --> 00:19:34.000
+Chase Growney: Go ahead.
+
+00:19:32.000 --> 00:19:38.000
+Brendan Owens: We'll have to… I'll need to catch up with the team and look at the calendar for that.
+
+00:19:41.000 --> 00:19:55.000
+William Lin | Snowflake: Uh, regarding the app, uh, on their end, do they have any roles set up for this app for deployment and for accessing, uh, grant setup and permissions, all these? Do they have any of that ready?
+
+00:19:57.000 --> 00:19:59.000
+Rishabh Raman: I don't believe so.
+
+00:19:59.000 --> 00:20:00.000
+William Lin | Snowflake: Okay.
+
+00:20:05.000 --> 00:20:08.000
+Chase Growney: I think they're just starting to get access.
+
+00:20:08.000 --> 00:20:15.000
+Chase Growney: Like, Michael has admin access, and then I think he's given access to… like, they just had SSO and SCIM set up last week.
+
+00:20:08.000 --> 00:20:09.000
+William Lin | Snowflake: Mm-hmm.
+
+00:20:14.000 --> 00:20:25.000
+Rishabh Raman: Yep. But the thing is, like, you know, even if he gets the access to the Git repo, he's not, like, you know, gonna be able to run it, right? Like, you know, because he doesn't have, like, all the Snowflake set up.
+
+00:20:25.000 --> 00:20:26.000
+William Lin | Snowflake: Right.
+
+00:20:25.000 --> 00:20:27.000
+Wole Babalola: Yeah.
+
+00:20:26.000 --> 00:20:28.000
+Chase Growney: Thank you.
+
+00:20:28.000 --> 00:20:29.000
+William Lin | Snowflake: Cool.
+
+00:20:30.000 --> 00:20:39.000
+Rishabh Raman: And, like, you know, there's just, like, you know, so many things in it, like, you know, if he wants to do the calculations and everything, he would want to have that UI up and running.
+
+00:20:39.000 --> 00:20:40.000
+Chase Growney: Right.
+
+00:20:39.000 --> 00:20:52.000
+Rishabh Raman: Which is why it's so complicated, like, you know, to do, like, those calculations and, like, just show it to someone, like, the math actually works out correct. Because it goes through, like, you know, 15 different, like, you know, UI changes in it.
+
+00:20:52.000 --> 00:20:58.000
+Rishabh Raman: Like, I don't know, Chase, like, you know, maybe I'm the stupid one, but, like, you know, it's.
+
+00:20:58.000 --> 00:21:01.000
+Chase Growney: Yeah. No, I…
+
+00:20:58.000 --> 00:21:00.000
+Rishabh Raman: Yeah, would I end it?
+
+00:21:00.000 --> 00:21:03.000
+Rishabh Raman: And what I ended up building…
+
+00:21:01.000 --> 00:21:02.000
+Chase Growney: I think it's…
+
+00:21:02.000 --> 00:21:03.000
+Chase Growney: Yeah.
+
+00:21:03.000 --> 00:21:05.000
+Rishabh Raman: would become unusable.
+
+00:21:06.000 --> 00:21:08.000
+Chase Growney: Yeah, I mean…
+
+00:21:08.000 --> 00:21:11.000
+Chase Growney: Well, that doesn't sound good. Um…
+
+00:21:11.000 --> 00:21:14.000
+Chase Growney: No, I think it's it's Michael sort of.
+
+00:21:14.000 --> 00:21:28.000
+Chase Growney: um, getting excited about everything he can do within Snowflake, and then probably taking a, you know, engineering mindset and being like, oh, I can do this, and I can do this, and I can do this, and just bolting on and bolting on instead of, like, you know.
+
+00:21:27.000 --> 00:21:29.000
+Rishabh Raman: Yup.
+
+00:21:28.000 --> 00:21:39.000
+Chase Growney: you know, going with the POC route and saying, hey, for the sake of simplicity, this is what we should run with, and then we can scale and change it. He wanted it to have everything.
+
+00:21:36.000 --> 00:21:38.000
+Rishabh Raman: I mean…
+
+00:21:39.000 --> 00:21:42.000
+Chase Growney: For, like, a small subset of users.
+
+00:21:42.000 --> 00:21:43.000
+Chase Growney: You know, day one.
+
+00:21:43.000 --> 00:21:56.000
+Rishabh Raman: I mean, I would be very honest with you all, like, you know, I'm happy to, like, you know, give you all, like, you know, create a user account for, like, some of you all in my demo account, where I have this app hosted, running on Snowpark Container Services, everything is up and running.
+
+00:21:56.000 --> 00:22:11.000
+Rishabh Raman: And I could… there's, like, you know, 5 different personas within this app, right? I mean, I'm happy to generate user access for you, right? Roleplay each one of them, roleplay each one of them, and try using this app. And see, like, you know, if you think, like, you know, this is ease of use.
+
+00:22:04.000 --> 00:22:06.000
+William Lin | Snowflake: That'd be great.
+
+00:22:11.000 --> 00:22:14.000
+Rishabh Raman: Like, this is not ease of use.
+
+00:22:14.000 --> 00:22:15.000
+William Lin | Snowflake: Okay.
+
+00:22:14.000 --> 00:22:17.000
+Rishabh Raman: Like, like, it's very complex.
+
+00:22:17.000 --> 00:22:19.000
+William Lin | Snowflake: Nothing yet. Okay.
+
+00:22:19.000 --> 00:22:30.000
+Rishabh Raman: And there's no machine learning, there's no AI, none of that. It's not complex because of, like, you know, any of those topics. It's just complex because of, like, how many UI layers you have to navigate.
+
+00:22:30.000 --> 00:22:36.000
+Rishabh Raman: Like, simulation, click here, click there, run this, like, you know, do this.
+
+00:22:36.000 --> 00:22:37.000
+Rishabh Raman: I mean…
+
+00:22:37.000 --> 00:22:40.000
+William Lin | Snowflake: Oh, another one.
+
+00:22:37.000 --> 00:22:42.000
+Rishabh Raman: Yeah, you're kind of making the… you're kind of making the case that it's easier to do in Excel.
+
+00:22:43.000 --> 00:23:00.000
+William Lin | Snowflake: And one other question. Right now, I see your app is accessing all the data and tables you created. But when we deploy to in the environment, do we need to access their data? How are we going to connect their data?
+
+00:22:49.000 --> 00:22:51.000
+Rishabh Raman: Yeah, that's…
+
+00:22:51.000 --> 00:22:52.000
+Rishabh Raman: Yep.
+
+00:22:59.000 --> 00:23:01.000
+Rishabh Raman: I believe, I believe…
+
+00:23:00.000 --> 00:23:02.000
+William Lin | Snowflake: Do you have same PDL, or…
+
+00:23:01.000 --> 00:23:20.000
+Rishabh Raman: I believe everything in this is, like, you know, you create stages against their S3 files, right? And then, like, you know, you essentially load and, like, you know, run that. Nothing beyond that. So, in the MVP, at least, like, you know, we are not doing anything beyond just, like, you know, pulling files.
+
+00:23:08.000 --> 00:23:09.000
+Wole Babalola: Yeah, yeah.
+
+00:23:20.000 --> 00:23:22.000
+Rishabh Raman: from the S3.
+
+00:23:22.000 --> 00:23:23.000
+William Lin | Snowflake: Oh.
+
+00:23:22.000 --> 00:23:31.000
+Rishabh Raman: So the files that my application is using currently are essentially those same files that we'll have to pull from S3. So we'll have to build that S3 ingestion.
+
+00:23:25.000 --> 00:23:27.000
+William Lin | Snowflake: Oh.
+
+00:23:30.000 --> 00:23:32.000
+William Lin | Snowflake: Mm, mm-hmm, okay.
+
+00:23:32.000 --> 00:23:34.000
+Rishabh Raman: So, S3 to Snowflake.
+
+00:23:34.000 --> 00:23:36.000
+Rishabh Raman: Land… land…
+
+00:23:34.000 --> 00:23:40.000
+Brendan Owens: And that's Wole's responsibility, William, and that's what Wole is working on with the team right now.
+
+00:23:35.000 --> 00:23:40.000
+Wole Babalola: Yeah, yeah, yeah, yeah, that's what I'm… that's what I'm… yeah.
+
+00:23:39.000 --> 00:23:45.000
+Rishabh Raman: Yeah, but I believe, like, you know, it will be exactly the same files. Um, so, like, you know.
+
+00:23:45.000 --> 00:23:52.000
+Rishabh Raman: once you actually land it in the raw, you can have everything up and running right away. And, um, you know, obviously, like, you know, I'll be…
+
+00:23:52.000 --> 00:23:55.000
+Rishabh Raman: Around, like, you know, to help you all with that, too.
+
+00:23:56.000 --> 00:23:57.000
+William Lin | Snowflake: Great.
+
+00:23:56.000 --> 00:23:58.000
+Brendan Owens: And I…
+
+00:23:56.000 --> 00:23:58.000
+Rishabh Raman: But my…
+
+00:23:58.000 --> 00:23:59.000
+Brendan Owens: Go ahead, go ahead.
+
+00:23:59.000 --> 00:24:03.000
+Rishabh Raman: I mean, the main… the main concern is, like, you know.
+
+00:24:04.000 --> 00:24:05.000
+Rishabh Raman: I mean…
+
+00:24:06.000 --> 00:24:14.000
+Rishabh Raman: Will we make this up and running? Yes. Does it actually work? I'm more concerned about that.
+
+00:24:15.000 --> 00:24:17.000
+Rishabh Raman: Like, not…
+
+00:24:15.000 --> 00:24:21.000
+Chase Growney: When you say that, yeah, you just mean, like, is it actually usable by end users? That's what you mean.
+
+00:24:19.000 --> 00:24:25.000
+Rishabh Raman: Forget about… suppose it's not… suppose it's not usable. Is it useful?
+
+00:24:26.000 --> 00:24:29.000
+Rishabh Raman: Like, like, like, who is it useful for?
+
+00:24:29.000 --> 00:24:31.000
+Rishabh Raman: Maybe Michael.
+
+00:24:37.000 --> 00:24:50.000
+Chase Growney: this is why I think… like, if the app's already built out, and really, at the end of the day, all you need to do is just bring the data into S3, and then do the ingestion, and then at that point, it's like…
+
+00:24:50.000 --> 00:25:00.000
+Chase Growney: it's running. It is now something that they could actually, you know, interact with. The faster we can do that, and then have a conversation with Michael and say, listen, it's…
+
+00:24:53.000 --> 00:24:54.000
+Wole Babalola: No.
+
+00:25:00.000 --> 00:25:12.000
+Chase Growney: you play around with it. We built this according to your specs. This is what you wanted us to build. You know, we've interacted, we've collaborated with you so much on this, and this is where we landed, and we're just…
+
+00:25:12.000 --> 00:25:13.000
+Chase Growney: you know.
+
+00:25:13.000 --> 00:25:19.000
+Chase Growney: our our concern is, like, this is, I mean, we we want your feedback.
+
+00:25:19.000 --> 00:25:22.000
+Chase Growney: Does this make your life easier?
+
+00:25:23.000 --> 00:25:42.000
+Rishabh Raman: does it make anybody's life easier who are the intended users, right? So you can see, like, you know, these are the, um, these are the landed, like, you know, files in here, right? And I will actually create, like, you know, uh, the UI access for you, uh, like a user account for you all, so you can at least, like, you know, play with the app, like, you know, within my.
+
+00:25:42.000 --> 00:25:46.000
+Rishabh Raman: Uh, within my demo account, right? And, like, you know, this had…
+
+00:25:45.000 --> 00:25:54.000
+Brendan Owens: Yeah, so with five minutes left, the services guys, I don't know if we have any remaining questions, but you'll get access to the demo.
+
+00:25:52.000 --> 00:25:53.000
+Rishabh Raman: Yep.
+
+00:25:54.000 --> 00:25:55.000
+Rishabh Raman: Yep.
+
+00:25:55.000 --> 00:26:03.000
+Brendan Owens: If there's any PRD changes going forward, let's communicate them in the channel so that we know.
+
+00:26:00.000 --> 00:26:01.000
+Rishabh Raman: Yes.
+
+00:26:03.000 --> 00:26:13.000
+Brendan Owens: Transparently, I'm concerned that when we wrote the SOW, we were basing it off of a PRD that included ML.
+
+00:26:12.000 --> 00:26:14.000
+Rishabh Raman: Yep.
+
+00:26:13.000 --> 00:26:17.000
+Brendan Owens: So I included additional effort and time for that.
+
+00:26:17.000 --> 00:26:26.000
+Brendan Owens: So, Chase, let's figure out with Michael… if you don't mind reaching out to Michael and figuring out that piece, if he wants it in there or not.
+
+00:26:26.000 --> 00:26:27.000
+Brendan Owens: uh…
+
+00:26:26.000 --> 00:26:36.000
+Chase Growney: Yeah, I mean, my perception is he does. So it's interesting that Rishabh… because it's not… it might have been stripped out of the PRD. I don't think Michael, like…
+
+00:26:29.000 --> 00:26:33.000
+Brendan Owens: Let's just get it in writing to confirm it.
+
+00:26:36.000 --> 00:26:38.000
+Chase Growney: I…
+
+00:26:38.000 --> 00:26:54.000
+Chase Growney: I can't explain why, but in the most recent call, we talked about how the PRD, or the ML was not in it, and that, um… I got the sense that Michael was like, oh, we need that ML in there, because it provides the guardrails for.
+
+00:26:54.000 --> 00:26:56.000
+Chase Growney: the price increases.
+
+00:26:55.000 --> 00:26:57.000
+Brendan Owens: Okay, let's…
+
+00:26:57.000 --> 00:27:02.000
+Brendan Owens: If you don't mind confirming with him over email and keeping me CC'd.
+
+00:27:02.000 --> 00:27:07.000
+Brendan Owens: We'll work on that. Rishabh will give the services guys demo access.
+
+00:27:07.000 --> 00:27:13.000
+Brendan Owens: Well, like, you have your next steps on S3 and getting access and everything.
+
+00:27:09.000 --> 00:27:11.000
+Wole Babalola: Yes.
+
+00:27:13.000 --> 00:27:16.000
+Brendan Owens: Lewis, once we hear from…
+
+00:27:16.000 --> 00:27:22.000
+Brendan Owens: Uh, from them on the ML piece, we'll get your, your area of focus.
+
+00:27:23.000 --> 00:27:25.000
+Brendan Owens: Um, nailed down.
+
+00:27:25.000 --> 00:27:27.000
+Brendan Owens: Um…
+
+00:27:27.000 --> 00:27:39.000
+Brendan Owens: And then the services guys, I booked time for all of us tomorrow to get an update on the schedule, at which point, Chase, I'll give you an update of, like, when we can give Michael access.
+
+00:27:39.000 --> 00:27:40.000
+Brendan Owens: Um…
+
+00:27:41.000 --> 00:27:50.000
+Brendan Owens: to the app pre-UAT. We'll have more concrete dates to act on, and I'll share those with Michael as well.
+
+00:27:42.000 --> 00:27:43.000
+Chase Growney: Yep.
+
+00:27:43.000 --> 00:27:45.000
+Chase Growney: Yep.
+
+00:27:50.000 --> 00:27:54.000
+Brendan Owens: And that… because then we'll have a good sense where we are with the account and everything, as well.
+
+00:27:55.000 --> 00:27:56.000
+Chase Growney: Okay.
+
+00:27:56.000 --> 00:28:11.000
+Rishabh Raman: Yeah, and, like, you know, uh… let's meet to, like, you know, do deep dive in… in a smaller cadence, like, the folks who would be working with, like, you know, I'm happy to, like, just, like, you know, do some deep… this is… there's a lot of elements in it, like, it's very hard to cover this in 30 minutes.
+
+00:27:56.000 --> 00:27:57.000
+Luis Villavicencio: So.
+
+00:28:11.000 --> 00:28:12.000
+Chase Growney: Yeah.
+
+00:28:11.000 --> 00:28:26.000
+Rishabh Raman: But I want you… I want to do justice to you all, so, like, you know, you can actually have, like, a good understanding of it. Uh, to me, like, you know, it took a lot of time wrapping my head around, like, some of the, uh, UI… like, it's all, like, in UI, essentially.
+
+00:28:17.000 --> 00:28:19.000
+Chase Growney: Yeah.
+
+00:28:25.000 --> 00:28:39.000
+Chase Growney: Yeah, so I just want to double click on this. I know we only have a few more minutes, but just on the UI part, you talk about the complexity and it's, you know, how this might not be the easiest thing to use. Is that all because of UI changes?
+
+00:28:40.000 --> 00:28:44.000
+Rishabh Raman: It's… all the PRD is UI. There's nothing else in it.
+
+00:28:44.000 --> 00:29:01.000
+Rishabh Raman: Like, there's no data set up, like, look at this, like, you know, you gotta be Raja, like, you know, then you are an FBA analyst, then you are, like, you know, Vincent, Roy, Michael, Elaine, this. Depending on that, like, you know, you can… everything changes based on that, right? So you have a work queue.
+
+00:28:45.000 --> 00:28:46.000
+Chase Growney: But they…
+
+00:29:01.000 --> 00:29:15.000
+Rishabh Raman: then you go into simulation, like, you know, then you click one new simulation here, then you gotta select, like, you know, plants, like, you know, technology, sold to, so then you gotta go in here, select products. This is part of his spec.
+
+00:29:15.000 --> 00:29:29.000
+Rishabh Raman: All here, like, you know, then you gotta define, like, each one of them, like, understand, like, you know, which one of them is, like, you know, reviewing… review all of this, run simulation, like, you know, then you have, like, you know, price index here.
+
+00:29:29.000 --> 00:29:32.000
+Rishabh Raman: he's just… I don't know.
+
+00:29:32.000 --> 00:29:34.000
+Rishabh Raman: These guys are, like, you know…
+
+00:29:34.000 --> 00:29:39.000
+Rishabh Raman: These are not data scientists or anything. Okay? Like, you know, they're analysts.
+
+00:29:39.000 --> 00:29:40.000
+Chase Growney: No.
+
+00:29:40.000 --> 00:29:42.000
+Rishabh Raman: like, they use Excel.
+
+00:29:42.000 --> 00:29:45.000
+Chase Growney: Doesn't seem that bad.
+
+00:29:44.000 --> 00:29:49.000
+Luis Villavicencio: So that Jing AI assistant on the top?
+
+00:29:48.000 --> 00:30:06.000
+Rishabh Raman: Yeah, yeah, I've added that with, like, you know, much more functionality to it, okay? The PRD actually talked about, like, you know, okay, we are gonna have, like, you know, this with, like, a semantic view and this. It wasn't very specific to it. I added it to provide, like, you know, much more ease of use to it.
+
+00:30:06.000 --> 00:30:20.000
+Rishabh Raman: Um, and, like, you know, you can interact with it, you can ask it questions, but again, like, none of these functionality, like, you know, of running simulation or anything, is not part of GenAI Assistant. Like, I could just simply type and run this simulation. You see what I mean?
+
+00:30:20.000 --> 00:30:27.000
+Rishabh Raman: Like the simulation and all of this, the entry point could very simply be Snowflake Intelligence.
+
+00:30:28.000 --> 00:30:31.000
+Chase Growney: Sure. And I think that.
+
+00:30:31.000 --> 00:30:34.000
+Rishabh Raman: That was the POC. That was the POC, by the way.
+
+00:30:31.000 --> 00:30:40.000
+Chase Growney: This can evolve. Right. Yeah. And that also exists. You have the semantic layer where you can go and have this. You can talk about.
+
+00:30:38.000 --> 00:30:50.000
+Rishabh Raman: PRD doesn't… the updated PRD removed that component. Where the what-if engine doesn't have to be inside Snowflake Intelligence. PRD doesn't talk about, like, you know, being able to run simulation.
+
+00:30:49.000 --> 00:31:05.000
+Chase Growney: Yeah, I think that this is something we just need to have a conversation with Michael about, because I can't imagine he meant to drop all this stuff from the PRD, and he probably wrote this all in AI, and it probably dropped some components. That's where I'm thinking that this happened, because I don't think he meant to…
+
+00:31:05.000 --> 00:31:14.000
+Chase Growney: like, the ML portion is very important, because it provides the guardrails of those price increase recommendations. So, um…
+
+00:31:12.000 --> 00:31:15.000
+Rishabh Raman: ML portion is not even there.
+
+00:31:14.000 --> 00:31:20.000
+Chase Growney: No, I know. I'm saying that it originally was in the POC, and it was like, it was crucial because…
+
+00:31:20.000 --> 00:31:22.000
+Chase Growney: It was giving, you know, the…
+
+00:31:22.000 --> 00:31:27.000
+Chase Growney: The app was giving 70% price increase recommendations when it's like you needed the cap.
+
+00:31:27.000 --> 00:31:32.000
+Chase Growney: You need to cap it like 7 or 5 based off of their willingness to pay or whatever. So.
+
+00:31:30.000 --> 00:31:36.000
+Rishabh Raman: Yeah, this is… it's very different from what you are imagining. Like, you know…
+
+00:31:34.000 --> 00:31:40.000
+Chase Growney: No, I'm saying that that was part of the POC, and then the PRD changed.
+
+00:31:37.000 --> 00:31:39.000
+Rishabh Raman: With that, but…
+
+00:31:39.000 --> 00:31:46.000
+Rishabh Raman: But that POC, what we had, this particular PRD is very different from it.
+
+00:31:46.000 --> 00:31:50.000
+Rishabh Raman: Like, it's not following the same… it's not following the same exact workflow.
+
+00:31:47.000 --> 00:31:48.000
+Chase Growney: I…
+
+00:31:52.000 --> 00:31:54.000
+Rishabh Raman: Like, in, like…
+
+00:31:52.000 --> 00:31:54.000
+Luis Villavicencio: So last question.
+
+00:31:54.000 --> 00:32:12.000
+Rishabh Raman: Like, in terms of, like, how the… it's essentially, like, you know, just to do justice to your question, okay? Like, you know, it's essentially following, calculate this, okay? Then calculate this, then run the simulation, then calculate this, then calculate this, okay? And that's what it's… it's essentially a chain of calculations.
+
+00:31:56.000 --> 00:31:58.000
+Chase Growney: Yep.
+
+00:32:12.000 --> 00:32:13.000
+Rishabh Raman: Okay.
+
+00:32:13.000 --> 00:32:16.000
+Rishabh Raman: Like, you know, there's no, like, you know…
+
+00:32:16.000 --> 00:32:27.000
+Rishabh Raman: Like, there's no place to, like, associate, like, you know, machine learning recommendation or things like that. You can, okay? I'm not saying you cannot, okay? But, like, you know, the way app is structured, it's like…
+
+00:32:27.000 --> 00:32:31.000
+Rishabh Raman: It's like, it's a sequence of calculations.
+
+00:32:33.000 --> 00:32:34.000
+Chase Growney: Right.
+
+00:32:33.000 --> 00:32:38.000
+Luis Villavicencio: Has the customer used it, kind of tested it with comments?
+
+00:32:34.000 --> 00:32:41.000
+Chase Growney: Okay. I have to drop. I have to drop it. You guys talk about next steps here.
+
+00:32:36.000 --> 00:32:38.000
+Rishabh Raman: No, no.
+
+00:32:38.000 --> 00:32:46.000
+Rishabh Raman: I don't think… I don't think any one of these people have ever seen or used this app. I highly doubt that.
+
+00:32:46.000 --> 00:32:48.000
+Rishabh Raman: Like, they're all ex…
+
+00:32:46.000 --> 00:32:49.000
+Chase Growney: You mean the updated… where it is now?
+
+00:32:49.000 --> 00:33:01.000
+Rishabh Raman: Or, like, you know, even the prototype, like, I don't think… Raja was the guy, like, you know, we presented during the POC, you know, Vincent, like, you know, Alain, Frederick, these are all, like, Excel users, essentially.
+
+00:32:50.000 --> 00:32:51.000
+Chase Growney: Yep.
+
+00:33:00.000 --> 00:33:04.000
+Chase Growney: All right, I got to drop. I'm sorry, guys, but carry on.
+
+00:33:02.000 --> 00:33:04.000
+Rishabh Raman: Yep.
+
+00:33:04.000 --> 00:33:06.000
+Rishabh Raman: Yeah, I got a drop, too.
+
+00:33:05.000 --> 00:33:09.000
+William Lin | Snowflake: I I will set up a meeting with you uh to go through the app again.
+
+00:33:07.000 --> 00:33:09.000
+Rishabh Raman: Yep.
+
+00:33:09.000 --> 00:33:10.000
+Rishabh Raman: Yep.
+
+00:33:09.000 --> 00:33:11.000
+William Lin | Snowflake: Thanks.
+
+00:33:10.000 --> 00:33:21.000
+Rishabh Raman: I mean, whatever… whatever the PRD said, we have… we have all of it, all of that, so at least we're doing what we are told, right? So, I mean, I'm just… I'm just pointing out, like, you know, this… it's not really.
+
+00:33:10.000 --> 00:33:11.000
+Brendan Owens: Cool.
+
+00:33:21.000 --> 00:33:23.000
+Rishabh Raman: Like, from a user perspective.
+
+00:33:23.000 --> 00:33:25.000
+William Lin | Snowflake: Continue.
+
+00:33:23.000 --> 00:33:27.000
+Rishabh Raman: Like, it's just navigating UI, hundreds of things.
+
+00:33:27.000 --> 00:33:29.000
+William Lin | Snowflake: Thank you. Thank you. This is good. Well.
+
+00:33:27.000 --> 00:33:34.000
+Rishabh Raman: Awesome. Alright, guys, let's, let's, let's sync again, okay? Uh, I'll be, I'll be available to help you.
+
+00:33:31.000 --> 00:33:32.000
+Brendan Owens: Thanks, all.
+
+00:33:33.000 --> 00:33:35.000
+William Lin | Snowflake: Thanks.
+
+00:33:34.000 --> 00:33:37.000
+Wole Babalola: Okay. Alright. Thank you.
+

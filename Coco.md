@@ -81,8 +81,20 @@ Where can I locate these numbers in the project?
   - "Does Arkema (the customer) know the specific pricing/margin numbers currently shown by the app are not reliable (audit Pass 3)? Is "deploy as-is" intended to cover shipping those numbers unchanged, or is there tolerance to fix the clearly-broken arithmetic (e.g., the beta-clamp bug that disables the ML model's influence entirely) within "productionalization" rather than "new feature"?"
 Keeping doc simple to understand would be great, since I am still new to this project.
 
+# 20260917
+
+There are more details gathered from team in files below:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/ref/20260915_MeetingNoteFromWole.md
+  - App meeting transcript
+    - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/ref/20260916 App Review's transcript.txt
+  - Chase's email and reply
+    - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/ref/20260916_ChaseEmailAndReply.md
+Please help update Project Plan below and coming steps:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260915_ProjectPlan.md
+We will have another meeting on the App today.
+
 # Todo
 
-- /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/ref/20260915_MeetingNoteFromWole.md
+
 
 # END
