@@ -115,8 +115,28 @@ Always let me know if you have any concerns.
 Please update file below for deliver a SAR App, which requested by my boss Daniel Sandler.
   - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260915_ProjectPlan.md
 
-# Todo
+After looking into what you provided, we do need to settle with SPCS due to Python codes.
+So I reverted the old Plan:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260915_ProjectPlan.md
+Moved the new SAR Plan to:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/others/20260915_ProjectPlan_SAR.md
+Please help create a short message in 20260915_ProjectPlan_SAR.md, I can post to Daniel and team in Slack channel for this not-going with SAR now.
+Plus please update file below for Grants (without SAR)
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260918_GrantsNeeded.md
+Do NOT return Hallucinations or OUTDATED info.
+Always let me know if you have any concerns.
 
+Thank you for updating.
+For file below:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260918_GrantsNeeded.md
+  - Please add a new simple and clear section I can send to client. They don't need details, just to-do steps with simple description.
+    - Since they are not Snowflake experts, just doing whatever we tell them to do.
+For file below:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/others/20260915_ProjectPlan_SAR.md
+  - Please simplify the message to Daniel in slack
+    - I will post in channel, but more a direct message to him. Just need to display important points for him.
+
+# Todo
 
 
 # END

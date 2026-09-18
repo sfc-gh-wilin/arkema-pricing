@@ -1,9 +1,48 @@
-# Arkema Pricing Cockpit — App Productionalization Project Plan
+# SAR Plan — ARCHIVED (superseded, kept for reference)
+
+> **Status: not proceeding.** Decision Sep 18, 2026: the app stays on **SPCS**. The blocker is that Snowflake App Runtime runs **Node.js only** today, and the ARC backend is Python (FastAPI). The active plan is `../20260915_ProjectPlan.md` (Rev 2, SPCS). Grants: `../20260918_GrantsNeeded.md`.
+>
+> This document is retained because the SAR analysis stays valid and will be worth revisiting once SAR supports Python.
+
+---
+
+## Slack message — ready to post
+
+Copy the block below. Written for the project channel; assumes Daniel and the delivery team are in it.
+
+---
+
+Quick update on the App workstream deployment target.
+
+Daniel asked us to look at delivering the Pricing Cockpit on **Snowflake App Runtime (SAR)** instead of SPCS. I've worked through it against the current SAR docs and the actual repo, and the recommendation is **to stay on SPCS for this engagement**. Short version of why:
+
+• **SAR runs Node.js only right now** — Python support is documented as planned, not shipped. Our backend is FastAPI: ~4,400 lines across 5 route modules, 93 route decorators. Moving to SAR means **rewriting the entire service tier in Node**, not repackaging it. That's a rearchitecture, and the SOW explicitly scopes deployment to SPCS ("M3-01 SPCS Setup & Deploy") with no rearchitecture in scope.
+
+• **No regression baseline to rewrite against.** Andrew's audit found that none of the ~14 numbers the app displays is provably correct. So a rewrite couldn't be validated against "the old app" or against "correct" — we'd be rebuilding pricing logic with no reference. Against a mid-October UAT that's a risk I don't think we should take.
+
+• **SPCS is a demonstrated path.** The Dockerfile, service spec, compute pool and image repo scripts already exist, and Rishabh has it running in his demo account.
+
+To be fair to the idea — **SAR is genuinely the better platform on the ops axis**: no container to maintain, managed scaling (which would fix our single-concurrent-user ceiling), a far more reproducible deploy than our current stub script, and SSO identity out of the box, which solves half of the M3-02 auth problem. **I'd suggest we bank it as a post-go-live phase 2 item** and revisit when SAR supports Python. I've kept the full SAR plan and analysis so we're not starting from scratch when we do.
+
+Two things I need either way, independent of this decision:
+
+1. **Is `BR68104` a paid account or still a trial?** (Trial blocks SAR entirely; worth knowing regardless.)
+2. **An ACCOUNTADMIN to action the grants.** I verified the account read-only yesterday — my role `EUNFG-AZURE-APP-ACCESS-SNOWFLAKE-ADMIN-PROD` currently has **zero object privileges**, `ARKEMA_PRICING_DB` doesn't exist, and there's no usable warehouse. I can't create a database, schema, or warehouse. The full request is in `20260918_GrantsNeeded.md` — **this is blocking all of Phase 1 and 2**, so I'd like a named owner and a turnaround date.
+
+Happy to walk through the SAR analysis with anyone who wants the detail.
+
+---
+
+*End of Slack message. Everything below is the full Rev 3 SAR plan, retained for reference.*
+
+---
+
+# Arkema Pricing Cockpit — App Productionalization Project Plan (SAR variant — ARCHIVED)
 
 **Created:** September 15, 2026
 **Last updated:** September 18, 2026 (Rev 3 — **deployment target changed to SAR** per Daniel Sandler; account verification added)
 **Author:** William Lin (App Productionalization workstream owner)
-**Status:** ACTIVE — replanned around a Snowflake App Runtime (SAR) delivery
+**Status:** ARCHIVED Sep 18, 2026 — not proceeding. See the banner at the top of this file.
 
 **Sources reviewed:**
 - App source: `arkema-pricing-ss/` (`arc/` and `scale/arc/` trees)
