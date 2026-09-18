@@ -93,6 +93,28 @@ Please help update Project Plan below and coming steps:
   - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260915_ProjectPlan.md
 We will have another meeting on the App today.
 
+# 20260918
+
+I will be deploying a App to Arkema Snowflake account.
+  - Will need to convert existing App to a SAR App.
+  - Existing App:
+    - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing-ss/arc/
+Using SNOW CLI connection "wl_dev_arkema".
+  - Feel free to access it and check, just do not make any changes in the account.
+The only role I can access now is:
+  - EUNFG-AZURE-APP-ACCESS-SNOWFLAKE-ADMIN-PROD
+  - I can't even create database, etc.
+Please help create a simple and neat md file to cover all the GRANTs I need to do my job.
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260918_GrantsNeeded.md
+Reference:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260915_ProjectPlan.md
+Do NOT return Hallucinations or OUTDATED info.
+  - Ex: SAR still new
+Always let me know if you have any concerns.
+
+Please update file below for deliver a SAR App, which requested by my boss Daniel Sandler.
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260915_ProjectPlan.md
+
 # Todo
 
 
