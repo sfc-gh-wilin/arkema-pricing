@@ -16,10 +16,10 @@
 # §0. For Arkema IT — What We Need You To Do
 
 **Who this is for:** whoever administers the Arkema Snowflake account `BR68104` (needs the `ACCOUNTADMIN` role).
-**Time needed:** about 30 minutes, plus one short decision (Step 2).
+**Time needed:** about 45 minutes, plus one short decision (Step 2).
 **Why:** the Snowflake Professional Services team needs a workspace and permissions in your Snowflake account before we can build and deploy the Pricing Cockpit application. Right now our account has no permissions at all, so no work can start.
 
-You do **not** need to understand the application or the SQL. Run the steps in order and send us back the confirmation in Step 7.
+There are **nine steps**. Steps 3–7 are SQL you copy, paste and run; Steps 1, 2, 8 and 9 need a short answer from you. You do **not** need to understand the application or the SQL.
 
 ---
 
@@ -160,19 +160,77 @@ GRANT USAGE ON INTEGRATION ARC_EXTERNAL_ACCESS TO ROLE ARC_APP_DEPLOYER;
 
 ---
 
-### Step 7 — Run one check and send us the result
+### Step 7 — Create the space for the application's AI features
+
+The application includes an AI assistant ("Ask ARC") that answers pricing questions in plain language. It is built on Snowflake's own AI features — Cortex Agents, Cortex Analyst and Cortex Search — so it needs one more small database and a few permissions.
 
 ```sql
-SHOW GRANTS TO ROLE ARC_APP_DEPLOYER;
+USE ROLE SYSADMIN;
+
+CREATE DATABASE IF NOT EXISTS SNOWFLAKE_INTELLIGENCE;
+CREATE SCHEMA   IF NOT EXISTS SNOWFLAKE_INTELLIGENCE.AGENTS;
+
+USE ROLE ACCOUNTADMIN;
+
+GRANT USAGE        ON DATABASE SNOWFLAKE_INTELLIGENCE        TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE        ON SCHEMA   SNOWFLAKE_INTELLIGENCE.AGENTS TO ROLE ARC_APP_DEPLOYER;
+GRANT CREATE AGENT ON SCHEMA   SNOWFLAKE_INTELLIGENCE.AGENTS TO ROLE ARC_APP_DEPLOYER;
+
+GRANT CREATE CORTEX SEARCH SERVICE ON SCHEMA ARKEMA_PRICING_DB.DOCS TO ROLE ARC_APP_DEPLOYER;
+```
+
+*What this does: creates the standard Snowflake location where AI assistants live, and lets us build the application's AI assistant and its document search there. Nothing is created that can reach outside `ARKEMA_PRICING_DB`.*
+
+---
+
+### Step 8 — Check two AI settings
+
+Snowflake normally switches these on for everyone by default. **Some organisations turn them off for security reasons.** We need to know which is the case here, because the AI assistant will not work without them — and we would rather check than ask you for permissions you have already granted.
+
+Please run this and include the result in your reply:
+
+```sql
 SHOW GRANTS TO ROLE PUBLIC;
 ```
 
-Please send us:
-1. The output of both commands (a screenshot or copy-paste is fine).
-2. Your answer to Step 1 (paid or trial).
-3. Your answers to the Step 2 decisions.
+In the output, look for these two lines:
 
-*Why the second command: one permission the application needs is normally switched on by default in Snowflake. We need to see whether your security team has turned it off. If it has been turned off, we will send you one extra line to run — we do not want to grant it unnecessarily.*
+| Look for | What it means |
+|---|---|
+| `USE AI FUNCTIONS` on `ACCOUNT` | Permission to call Snowflake's AI features |
+| `SNOWFLAKE.CORTEX_USER` (a database role) | Permission to use Snowflake Cortex |
+
+- **If both are present** — nothing more to do. Skip the rest of this step.
+- **If either is missing** — someone has deliberately restricted AI usage in your account. Please run the matching line(s) below, **or** tell us it was restricted on purpose and we will raise it with your security team before going further:
+
+```sql
+USE ROLE ACCOUNTADMIN;
+
+-- Only if "USE AI FUNCTIONS" was missing:
+GRANT USE AI FUNCTIONS ON ACCOUNT TO ROLE ARC_APP_DEPLOYER;
+
+-- Only if "SNOWFLAKE.CORTEX_USER" was missing:
+GRANT DATABASE ROLE SNOWFLAKE.CORTEX_USER TO ROLE ARC_APP_DEPLOYER;
+```
+
+*The same output also tells us about one non-AI permission we need, so this single command covers both checks.*
+
+---
+
+### Step 9 — Send us the results
+
+Please reply with:
+
+1. The output of `SHOW GRANTS TO ROLE PUBLIC;` from Step 8.
+2. The output of `SHOW GRANTS TO ROLE ARC_APP_DEPLOYER;` (run this now — it confirms Steps 3–7 worked).
+3. Your answer to Step 1 (paid or trial account).
+4. Your answers to the Step 2 decisions.
+
+```sql
+SHOW GRANTS TO ROLE ARC_APP_DEPLOYER;
+```
+
+A screenshot or copy-paste of each is fine.
 
 ---
 
@@ -185,8 +243,9 @@ So the review is straightforward:
 - **No ability to grant permissions to anyone else.**
 - **No unrestricted internet access.** Only the eight specific addresses listed in Step 5.
 - **Nothing granted to all users.** No permissions are given to Snowflake's `PUBLIC` role.
+- **No customer data leaves Snowflake through the AI features.** Cortex Agents, Cortex Analyst and Cortex Search all run inside your Snowflake account. The AI assistant reads only the pricing data in `ARKEMA_PRICING_DB`.
 
-Everything above can be removed later by dropping the `ARC_APP_DEPLOYER` role and the objects created in Steps 4 and 5.
+Everything above can be removed later by dropping the `ARC_APP_DEPLOYER` role and the objects created in Steps 4, 5 and 7.
 
 ---
 
@@ -214,7 +273,24 @@ No objects were created, altered, or dropped. Evidence from `SHOW` commands run 
 | `SHOW ROLES` | `ACCOUNTADMIN`, `SECURITYADMIN`, `SYSADMIN`, `USERADMIN`, `PUBLIC`, plus AAD-provisioned roles. **No `ARC_*` role exists.** |
 | `SHOW GRANTS TO USER "A6347057@ARKEMA.COM"` | My role was granted by `AAD_PROVISIONER` — i.e. it is managed by the Entra ID / SCIM pipeline, not by this project |
 
-**Net:** the account is effectively empty from my perspective. Every object the app needs — database, schema, warehouse, compute pool, image repository, external access integration — has to be created, and I cannot create any of them.
+**Net:** the account is effectively empty from my perspective. Every object the app needs — database, schema, warehouse, compute pool, image repository, external access integration, **Cortex Search services, semantic-model stage, and Cortex Agents** — has to be created, and I cannot create any of them.
+
+### 1a. What the AI layer actually is (corrected after reading the repo)
+
+I checked `arkema-pricing-ss/arc/cortex/` and `arc/ddl/` directly rather than relying on the architecture doc. Three things differ from what I assumed in my first draft:
+
+| Component | What it actually is | Where |
+|---|---|---|
+| **Semantic model** | **A YAML file on an internal stage — not a native `SEMANTIC VIEW` object.** Referenced as `@ARKEMA_PRICING_DB.MART.SEMANTIC_MODELS/arc_v2_semantic_model.yaml`. The stage is created by `ddl/001_database.sql` line 62. | `cortex/arc_semantic_model.yaml`, `cortex/arc_v2_semantic_model.yaml` |
+| **Cortex Search** | Two services over market-note documents: `ARKEMA_PRICING_DB.DOCS.ARC_MARKET_INTEL` (v1) and `ARKEMA_PRICING_DB.DOCS.ARC_V2_MARKET_INTEL` (v2). Both refresh on `TARGET_LAG = '1 day'` using `ARC_COMPUTE_WH`. | `cortex/deploy_cortex.sql`, `cortex/deploy_agent_v2.sql` |
+| **Cortex Agents** | `ARC_AGENT` (v1) and `ARC_V2_AGENT` (v2), both in `SNOWFLAKE_INTELLIGENCE.AGENTS`. v1 was created through the Snowsight UI from `arc_agent.json`; v2 has real `CREATE AGENT` DDL. | `cortex/deploy_agent.sql`, `cortex/deploy_agent_v2.sql`, `cortex/arc_agent.json` |
+
+**This correction matters for the grants.** My earlier draft asked for `GRANT SELECT ON SEMANTIC VIEW` — that privilege does not apply here, because there is no semantic view object. What is actually needed is `READ` on the stage holding the YAML. §6 below is corrected.
+
+**Two further things the agent spec reveals**, both of which add grants I had missed:
+
+1. **The agent calls stored procedures as tools** — `ARKEMA_PRICING_DB.MART.SP_NLC2_AGENT_SIMULATE` (`run_simulation`) and `ARKEMA_PRICING_DB.ML.SP_NLC2_AGENT_RECOMMEND` (`run_recommendations`). So `USAGE ON PROCEDURE` is needed in **`MART` and `ML`**, not just `ATOMIC` and `GOV` as I originally wrote.
+2. **The app reaches the agent over the REST API**, not SQL — `arc_agent_client.py` line 36 posts to `/api/v2/databases/{db}/schemas/{schema}/agents/{name}:run`. Functionally this still needs `USAGE ON AGENT`, but it means the agent call is an authenticated HTTPS call from inside the container to the Snowflake host, which is worth knowing when debugging.
 
 ---
 
@@ -407,26 +483,113 @@ GRANT SELECT ON FUTURE VIEWS   IN DATABASE ARKEMA_PRICING_DB TO ROLE ARC_APP_DEP
 GRANT INSERT, UPDATE, DELETE ON ALL TABLES    IN SCHEMA ARKEMA_PRICING_DB.GOV TO ROLE ARC_APP_DEPLOYER;
 GRANT INSERT, UPDATE, DELETE ON FUTURE TABLES IN SCHEMA ARKEMA_PRICING_DB.GOV TO ROLE ARC_APP_DEPLOYER;
 
--- Simulation / recommendation stored procedures (SP_SIMULATE_MOVC, SP_BUILD_RECOMMENDATIONS, ...)
+-- Simulation / recommendation stored procedures.
+-- ATOMIC + GOV: SP_SIMULATE_MOVC, governance writes, etc.
+-- MART + ML: the two procedures the Cortex Agent calls as tools (see §1a)
 GRANT USAGE ON ALL PROCEDURES    IN SCHEMA ARKEMA_PRICING_DB.ATOMIC TO ROLE ARC_APP_DEPLOYER;
 GRANT USAGE ON FUTURE PROCEDURES IN SCHEMA ARKEMA_PRICING_DB.ATOMIC TO ROLE ARC_APP_DEPLOYER;
 GRANT USAGE ON ALL PROCEDURES    IN SCHEMA ARKEMA_PRICING_DB.GOV    TO ROLE ARC_APP_DEPLOYER;
 GRANT USAGE ON FUTURE PROCEDURES IN SCHEMA ARKEMA_PRICING_DB.GOV    TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE ON ALL PROCEDURES    IN SCHEMA ARKEMA_PRICING_DB.MART   TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE ON FUTURE PROCEDURES IN SCHEMA ARKEMA_PRICING_DB.MART   TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE ON ALL PROCEDURES    IN SCHEMA ARKEMA_PRICING_DB.ML     TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE ON FUTURE PROCEDURES IN SCHEMA ARKEMA_PRICING_DB.ML     TO ROLE ARC_APP_DEPLOYER;
 ```
 
-### Cortex Agent (F8 GenAI — customer-confirmed "Must")
+---
 
-`service_spec.yaml` points the app at `SNOWFLAKE_INTELLIGENCE.AGENTS.ARC_AGENT`. **Verified Sep 18: `SNOWFLAKE_INTELLIGENCE` does not exist in `BR68104`** — the agent and its semantic view have to be created here, not just granted.
+## 6a. AI layer: Cortex Agent, Cortex Search, semantic model (F8 GenAI — customer-confirmed "Must")
+
+Read §1a first — the AI layer is not shaped the way the architecture doc implies. Four separate things need grants.
+
+### (a) Account-level Cortex access — check, don't assume
+
+Calling Cortex functions needs **both** an account-level privilege **and** a database role:
+- `USE AI FUNCTIONS` on the account, **and**
+- the `SNOWFLAKE.CORTEX_USER` database role (or `SNOWFLAKE.AI_FUNCTIONS_USER`).
+
+**Both are granted to `PUBLIC` by default**, so `ARC_APP_DEPLOYER` most likely already has them and **no grant is needed**. But an administrator can revoke either from `PUBLIC`, and in a security-conscious account that is a realistic possibility. Same pattern as `BIND SERVICE ENDPOINT` in §5 — **check first**:
 
 ```sql
--- After the agent and semantic view are created:
-GRANT USAGE ON DATABASE SNOWFLAKE_INTELLIGENCE        TO ROLE ARC_APP_DEPLOYER;
-GRANT USAGE ON SCHEMA   SNOWFLAKE_INTELLIGENCE.AGENTS TO ROLE ARC_APP_DEPLOYER;
-GRANT USAGE ON AGENT    SNOWFLAKE_INTELLIGENCE.AGENTS.ARC_AGENT TO ROLE ARC_APP_DEPLOYER;
-GRANT SELECT ON SEMANTIC VIEW ARKEMA_PRICING_DB.MART.<SEMANTIC_VIEW> TO ROLE ARC_APP_DEPLOYER;
+SHOW GRANTS TO ROLE PUBLIC;   -- look for: USE AI FUNCTIONS on ACCOUNT,
+                              -- and DATABASE ROLE SNOWFLAKE.CORTEX_USER
+
+-- ONLY if either has been revoked from PUBLIC (run as ACCOUNTADMIN):
+GRANT USE AI FUNCTIONS ON ACCOUNT TO ROLE ARC_APP_DEPLOYER;
+GRANT DATABASE ROLE SNOWFLAKE.CORTEX_USER TO ROLE ARC_APP_DEPLOYER;
 ```
 
-> **Do not reproduce the POC's `GRANT ... TO ROLE PUBLIC` on the agent.** In the prototype, `ARC_AGENT` was granted to `PUBLIC`. That is the same authorization defect class as the audit's #1 blocker and must not be carried into this account.
+> `SNOWFLAKE.CORTEX_USER` **cannot be granted directly to a user** — it must go to an account role, which is what we are doing.
+
+**This is not optional plumbing.** Creating a Cortex Search service itself requires `CORTEX_USER` (or `CORTEX_EMBED_USER`), because the service calls the embedding functions to build its index. If this is missing, `CREATE CORTEX SEARCH SERVICE` fails outright — it is not a runtime-only concern.
+
+### (b) The semantic model — a stage, not a semantic view
+
+`ddl/001_database.sql` creates the stage; the YAML is uploaded to it by the deploy script.
+
+```sql
+-- Owned by ARC_APP_DEPLOYER if §3 grants database ownership; stated explicitly regardless
+GRANT READ  ON STAGE ARKEMA_PRICING_DB.MART.SEMANTIC_MODELS TO ROLE ARC_APP_DEPLOYER;
+GRANT WRITE ON STAGE ARKEMA_PRICING_DB.MART.SEMANTIC_MODELS TO ROLE ARC_APP_DEPLOYER;  -- to upload the YAML
+```
+
+`WRITE` is needed because the deploy step pushes `arc_v2_semantic_model.yaml` to the stage (`snow stage copy`). `READ` is what Cortex Analyst uses at query time.
+
+### (c) Cortex Search services
+
+Two services over the market-note documents in `DOCS`. Creating them needs `CREATE CORTEX SEARCH SERVICE` on the schema, `SELECT` on the source table, and `USAGE` on the refresh warehouse.
+
+```sql
+GRANT CREATE CORTEX SEARCH SERVICE ON SCHEMA ARKEMA_PRICING_DB.DOCS TO ROLE ARC_APP_DEPLOYER;
+
+-- Source table the services index (already covered by the SELECT grants above,
+-- repeated here so the dependency is obvious)
+GRANT SELECT ON TABLE ARKEMA_PRICING_DB.DOCS.MARKET_NOTES TO ROLE ARC_APP_DEPLOYER;
+
+-- Refresh warehouse — already granted in §3
+-- GRANT USAGE ON WAREHOUSE ARC_COMPUTE_WH TO ROLE ARC_APP_DEPLOYER;
+
+-- After creation, for any role that needs to query them (including the agent's caller)
+GRANT USAGE ON CORTEX SEARCH SERVICE ARKEMA_PRICING_DB.DOCS.ARC_MARKET_INTEL    TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE ON CORTEX SEARCH SERVICE ARKEMA_PRICING_DB.DOCS.ARC_V2_MARKET_INTEL TO ROLE ARC_APP_DEPLOYER;
+```
+
+**Cost note worth flagging now:** both services are defined with `TARGET_LAG = '1 day'`, so they will refresh daily against `ARC_COMPUTE_WH` whether or not anyone uses the app. Small for the current document volume, but it is a standing cost that starts the moment they are created.
+
+### (d) The Cortex Agents
+
+`SNOWFLAKE_INTELLIGENCE` **does not exist in `BR68104`** (verified Sep 18). It has to be created, along with its `AGENTS` schema, before either agent can be deployed.
+
+```sql
+USE ROLE SYSADMIN;   -- or ACCOUNTADMIN
+CREATE DATABASE IF NOT EXISTS SNOWFLAKE_INTELLIGENCE;
+CREATE SCHEMA   IF NOT EXISTS SNOWFLAKE_INTELLIGENCE.AGENTS;
+
+USE ROLE ACCOUNTADMIN;
+GRANT USAGE        ON DATABASE SNOWFLAKE_INTELLIGENCE        TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE        ON SCHEMA   SNOWFLAKE_INTELLIGENCE.AGENTS TO ROLE ARC_APP_DEPLOYER;
+GRANT CREATE AGENT ON SCHEMA   SNOWFLAKE_INTELLIGENCE.AGENTS TO ROLE ARC_APP_DEPLOYER;
+
+-- After the agents are created, for the app (and later the UAT role) to invoke them
+GRANT USAGE ON AGENT SNOWFLAKE_INTELLIGENCE.AGENTS.ARC_AGENT    TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE ON AGENT SNOWFLAKE_INTELLIGENCE.AGENTS.ARC_V2_AGENT TO ROLE ARC_APP_DEPLOYER;
+```
+
+`CREATE AGENT` additionally requires that the creating role hold `USAGE` on the Cortex Search services referenced in the agent spec, and `USAGE` on the database, schema and tables behind the semantic model — all covered by (b), (c) and §6 above.
+
+> **Which agent is live matters.** `service_spec.yaml` sets `ARC_AGENT_NAME: ARC_AGENT` (v1), but v1 was created by hand in the Snowsight UI and has no reproducible DDL, while `ARC_V2_AGENT` does (`cortex/deploy_agent_v2.sql`) and is the one aligned with the NLC2 pilot. **This needs deciding in Phase 1** — I would rather deploy the version that can be rebuilt from the repo. Flagging it as an open item, not assuming it.
+
+### (e) Do not carry over the POC's `PUBLIC` grants
+
+`cortex/deploy_agent_v2.sql` ends with:
+
+```sql
+GRANT USAGE ON AGENT SNOWFLAKE_INTELLIGENCE.AGENTS.ARC_V2_AGENT TO ROLE PUBLIC;
+```
+
+**Do not run that line in the Arkema account.** `PUBLIC` is granted to every user, so this would let anyone in the account query the pricing agent — and through its tools, run simulations and the ML recommendation engine against real margin data. It is the same authorization defect class as the audit's #1 blocker. Grant the agent to a named role instead.
+
+`arc_agent.json` / `deploy_agent.sql` should be checked for the same pattern before v1 is deployed.
 
 ---
 
@@ -497,11 +660,14 @@ Ordered by how much they can cost.
 1. **I am 100% blocked.** My role has zero privileges. I cannot create a database, a schema, or a warehouse, and `ARKEMA_PRICING_DB` does not exist. **Every item in the App workstream plan — Phase 1 discovery included — is waiting on this document being actioned.** Please name the `ACCOUNTADMIN` who owns it and give me a turnaround date; my critical path now runs entirely through them.
 2. **`arc/deploy/spcs_setup.sql` must not be run as-is.** It runs `USE DATABASE ARKEMA_PRICING_DB` before that database exists, grants everything to `SYSADMIN` rather than a project role, uses `CREATE OR REPLACE` on the external access integration, and `GRANT SELECT ON ALL TABLES` on schemas whose tables do not exist yet so the grants would silently apply to nothing. §3–§6 above supersede it. I will fix the script under M3-01.
 3. **The BOM fan-out has no guardrail today.** Up to 144× scan multiplication on real ZFSC07 data, no statement timeout, no cancel path. The `STATEMENT_TIMEOUT_IN_SECONDS = 3600` in §3 is the cheap mitigation. It is worth setting before any real data lands, not after the first runaway bill.
-4. **Egress hosts need an InfoSec decision, not just a grant.** §4c opens six public CDN hosts for map tiles and fonts. If Arkema InfoSec refuses, the map and font behaviour changes and that becomes a UI finding for UAT. Better to know in September.
-5. **The POC's `PUBLIC` grants must not be carried over.** `ARC_AGENT` was granted to `ROLE PUBLIC` in the prototype. Getting this scoped correctly at grant time is far cheaper than retrofitting it during UAT.
-6. **The service spec has no `serviceRoles:` block**, so as written there is no way to grant anyone endpoint access — Michael's early access and UAT sharing both depend on a spec change, not a grant. Small fix, but it has to happen before §7 is usable, and it is the kind of thing that surfaces on the morning of a UAT kickoff if nobody looks for it now.
-7. **Paid vs trial account is still unconfirmed.** This does not block SPCS — but it was the blocker for SAR, and it likely affects other platform features, so it is worth answering while we have an admin's attention.
-8. **§7 is deliberately provisional.** I would rather confirm service-role syntax against a real deployed service than guess at it. It is not on the critical path for §3–§6.
+4. **Egress hosts need an InfoSec decision, not just a grant.** §4c opens eight public CDN hosts for map tiles and fonts. If Arkema InfoSec refuses, the map and font behaviour changes and that becomes a UI finding for UAT. Better to know in September.
+5. **The POC's `PUBLIC` grants must not be carried over.** `cortex/deploy_agent_v2.sql` ends with `GRANT USAGE ON AGENT ... ARC_V2_AGENT TO ROLE PUBLIC`. In the Arkema account that would let **any user** query the pricing agent and, through its `run_simulation` and `run_recommendations` tools, execute simulations and the ML pricing engine against real margin data. Same defect class as the audit's #1 blocker. Getting this scoped at grant time is far cheaper than retrofitting during UAT. See §6a(e).
+6. **`ARC_AGENT` (v1) has no reproducible DDL.** It was created by hand in the Snowsight UI from `arc_agent.json`, and `service_spec.yaml` points the app at it. `ARC_V2_AGENT` does have DDL and is the NLC2-pilot-aligned version. **Which one we deploy needs deciding in Phase 1** — if it is v1, we have an unreproducible object in the critical path, which is the same class of problem as the audit's finding #6 about the deployment not being rebuildable from the repo.
+7. **The service spec has no `serviceRoles:` block**, so as written there is no way to grant anyone endpoint access — Michael's early access and UAT sharing both depend on a spec change, not a grant. Small fix, but it has to happen before §7 is usable, and it is the kind of thing that surfaces on the morning of a UAT kickoff if nobody looks for it now.
+8. **Two Cortex Search services will start costing money the day they are created.** Both are defined with `TARGET_LAG = '1 day'` against `ARC_COMPUTE_WH`, so they refresh daily whether or not anyone opens the app. Small at current document volumes, but it is a standing cost and worth a conscious decision rather than a surprise on the first bill.
+9. **AI access may be deliberately restricted in this account.** `USE AI FUNCTIONS` and `SNOWFLAKE.CORTEX_USER` are granted to `PUBLIC` by default, but a security-conscious organisation may have revoked them. If Arkema has, **F8 GenAI — which Michael confirmed in writing as a "Must" — cannot work without a policy decision from their security team.** That is a scope conversation, not a grant, and I would rather discover it in September. Step 8 of §0 is designed to surface it.
+10. **Paid vs trial account is still unconfirmed.** This does not block SPCS — but it was the blocker for SAR, and it likely affects other platform features, so it is worth answering while we have an admin's attention.
+11. **§7 is deliberately provisional.** I would rather confirm service-role syntax against a real deployed service than guess at it. It is not on the critical path for §3–§6.
 
 ---
 
