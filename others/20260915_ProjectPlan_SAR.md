@@ -6,30 +6,28 @@
 
 ---
 
-## Slack message — ready to post
+## Slack message to Daniel — ready to post
 
-Copy the block below. Written for the project channel; assumes Daniel and the delivery team are in it.
+Short and direct. Copy the block below.
+
+--- My version
+
+Hi Daniel. Making this App a SAR would be super!
+After looking more into this App, SAR needs to be hold off maybe to next phase.
+This App's backend is Python FastAPI with ~4,400 lines, 93 routes.
+SAR run Node.js only, Python is on the roadmap but not ready yet.
 
 ---
 
-Quick update on the App workstream deployment target.
+Hi Daniel — looked into SAR for the Pricing Cockpit. **Recommendation: stay on SPCS for this engagement.**
 
-Daniel asked us to look at delivering the Pricing Cockpit on **Snowflake App Runtime (SAR)** instead of SPCS. I've worked through it against the current SAR docs and the actual repo, and the recommendation is **to stay on SPCS for this engagement**. Short version of why:
+The blocker is simple: **SAR only runs Node.js today** (Python is on the roadmap, not shipped). Our backend is FastAPI — ~4,400 lines, 93 routes. SAR means rewriting the whole service tier, not repackaging it. With mid-October UAT, and Andrew's audit finding that none of the app's numbers is provably correct, we'd be rebuilding pricing logic with nothing reliable to validate against. Too much risk for the window.
 
-• **SAR runs Node.js only right now** — Python support is documented as planned, not shipped. Our backend is FastAPI: ~4,400 lines across 5 route modules, 93 route decorators. Moving to SAR means **rewriting the entire service tier in Node**, not repackaging it. That's a rearchitecture, and the SOW explicitly scopes deployment to SPCS ("M3-01 SPCS Setup & Deploy") with no rearchitecture in scope.
+**To be clear, SAR is the better platform** — no container to maintain, managed scaling (fixes our single-user ceiling), much cleaner deploys, and SSO identity that solves half the auth problem. Worth doing, just not inside this engagement. **Suggest we bank it as a post-go-live phase 2** and revisit when SAR supports Python. Full analysis is written up so we're not starting over.
 
-• **No regression baseline to rewrite against.** Andrew's audit found that none of the ~14 numbers the app displays is provably correct. So a rewrite couldn't be validated against "the old app" or against "correct" — we'd be rebuilding pricing logic with no reference. Against a mid-October UAT that's a risk I don't think we should take.
+One thing I do need from you: **I'm blocked on Arkema account access.** My role has zero privileges — I can't create a database or warehouse, and `ARKEMA_PRICING_DB` doesn't exist yet. I've prepared a step-by-step doc for their IT team. Can you help me get an ACCOUNTADMIN owner and a date? This is holding up everything, including discovery.
 
-• **SPCS is a demonstrated path.** The Dockerfile, service spec, compute pool and image repo scripts already exist, and Rishabh has it running in his demo account.
-
-To be fair to the idea — **SAR is genuinely the better platform on the ops axis**: no container to maintain, managed scaling (which would fix our single-concurrent-user ceiling), a far more reproducible deploy than our current stub script, and SSO identity out of the box, which solves half of the M3-02 auth problem. **I'd suggest we bank it as a post-go-live phase 2 item** and revisit when SAR supports Python. I've kept the full SAR plan and analysis so we're not starting from scratch when we do.
-
-Two things I need either way, independent of this decision:
-
-1. **Is `BR68104` a paid account or still a trial?** (Trial blocks SAR entirely; worth knowing regardless.)
-2. **An ACCOUNTADMIN to action the grants.** I verified the account read-only yesterday — my role `EUNFG-AZURE-APP-ACCESS-SNOWFLAKE-ADMIN-PROD` currently has **zero object privileges**, `ARKEMA_PRICING_DB` doesn't exist, and there's no usable warehouse. I can't create a database, schema, or warehouse. The full request is in `20260918_GrantsNeeded.md` — **this is blocking all of Phase 1 and 2**, so I'd like a named owner and a turnaround date.
-
-Happy to walk through the SAR analysis with anyone who wants the detail.
+Happy to walk through the SAR detail whenever useful.
 
 ---
 

@@ -136,6 +136,12 @@ For file below:
   - Please simplify the message to Daniel in slack
     - I will post in channel, but more a direct message to him. Just need to display important points for him.
 
+For file below:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260918_GrantsNeeded.md
+The App does use Cortex Agent with Sematic Views as well.
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing-ss/arc/
+Please make sure Grants covering AI usages as well.
+
 # Todo
 
 

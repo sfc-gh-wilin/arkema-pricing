@@ -9,6 +9,195 @@
 
 > **Ask in one line:** the role above currently has **zero object privileges**. Nothing can be built or deployed until an `ACCOUNTADMIN` actions §3–§6.
 
+> **Sending this to Arkema?** Send **§0 only**. It is self-contained and written for a non-specialist. Sections 1–10 are my internal working notes.
+
+---
+
+# §0. For Arkema IT — What We Need You To Do
+
+**Who this is for:** whoever administers the Arkema Snowflake account `BR68104` (needs the `ACCOUNTADMIN` role).
+**Time needed:** about 30 minutes, plus one short decision (Step 2).
+**Why:** the Snowflake Professional Services team needs a workspace and permissions in your Snowflake account before we can build and deploy the Pricing Cockpit application. Right now our account has no permissions at all, so no work can start.
+
+You do **not** need to understand the application or the SQL. Run the steps in order and send us back the confirmation in Step 7.
+
+---
+
+### Step 1 — Confirm the account is a paid account
+
+Please confirm `BR68104` is a **paid** Snowflake account and not a trial account. Just a yes/no in your reply is fine.
+
+*(Why we ask: some Snowflake features are unavailable on trial accounts. This affects what we can build.)*
+
+---
+
+### Step 2 — Two decisions we need from you
+
+Please tell us your preference. If you have no preference, say so and we will use the defaults.
+
+| # | Decision | Default we suggest |
+|---|---|---|
+| 2a | **Names for the new objects.** We suggest `ARKEMA_PRICING_DB` (database), `ARC_COMPUTE_WH` (warehouse), `ARC_APP_DEPLOYER` (role). If Arkema has naming standards, give us the names you want instead and we will adjust the script. | Use the suggested names |
+| 2b | **Internet access for the app's maps and fonts.** The application shows a map and uses web fonts, which means it needs to reach eight public internet addresses (listed in Step 5). **Your security team should approve this list.** If they refuse, tell us — the map and fonts will not display, and we will plan around it. | Approve the eight addresses |
+
+---
+
+### Step 3 — Create a role for our team
+
+This creates a dedicated role for the project, so our permissions are contained and easy to remove later.
+
+```sql
+USE ROLE USERADMIN;
+CREATE ROLE IF NOT EXISTS ARC_APP_DEPLOYER
+  COMMENT = 'Snowflake PS - builds and deploys the ARC Pricing Cockpit application';
+
+USE ROLE SECURITYADMIN;
+GRANT ROLE ARC_APP_DEPLOYER TO ROLE "EUNFG-AZURE-APP-ACCESS-SNOWFLAKE-ADMIN-PROD";
+GRANT ROLE ARC_APP_DEPLOYER TO ROLE SYSADMIN;
+```
+
+*What this does: creates a project role and makes it usable by our existing Arkema login, and visible to your system administrators.*
+
+---
+
+### Step 4 — Create the database and the compute
+
+This creates the workspace where the application's data will live, and the compute resource that runs its queries.
+
+```sql
+USE ROLE SYSADMIN;
+
+CREATE DATABASE IF NOT EXISTS ARKEMA_PRICING_DB;
+
+CREATE SCHEMA IF NOT EXISTS ARKEMA_PRICING_DB.RAW;
+CREATE SCHEMA IF NOT EXISTS ARKEMA_PRICING_DB.ATOMIC;
+CREATE SCHEMA IF NOT EXISTS ARKEMA_PRICING_DB.MART;
+CREATE SCHEMA IF NOT EXISTS ARKEMA_PRICING_DB.ML;
+CREATE SCHEMA IF NOT EXISTS ARKEMA_PRICING_DB.GOV;
+CREATE SCHEMA IF NOT EXISTS ARKEMA_PRICING_DB.DOCS;
+CREATE SCHEMA IF NOT EXISTS ARKEMA_PRICING_DB.SPCS;
+
+CREATE WAREHOUSE IF NOT EXISTS ARC_COMPUTE_WH
+  WAREHOUSE_SIZE = 'SMALL'
+  AUTO_SUSPEND   = 300
+  AUTO_RESUME    = TRUE
+  INITIALLY_SUSPENDED = TRUE
+  STATEMENT_TIMEOUT_IN_SECONDS = 3600;
+
+GRANT OWNERSHIP ON DATABASE ARKEMA_PRICING_DB TO ROLE ARC_APP_DEPLOYER;
+GRANT OWNERSHIP ON ALL SCHEMAS IN DATABASE ARKEMA_PRICING_DB TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE, OPERATE, MONITOR ON WAREHOUSE ARC_COMPUTE_WH TO ROLE ARC_APP_DEPLOYER;
+```
+
+*What this does: creates an empty database with seven sections, plus a small compute resource that switches itself off after 5 minutes of inactivity to control cost. The `STATEMENT_TIMEOUT_IN_SECONDS` line is a deliberate safety limit — please keep it. It stops a runaway query from running for hours and generating unnecessary cost.*
+
+---
+
+### Step 5 — Create the resources that run the application
+
+This creates the infrastructure that hosts the application itself.
+
+```sql
+USE ROLE ACCOUNTADMIN;
+
+-- Where the application runs
+CREATE COMPUTE POOL IF NOT EXISTS ARC_COMPUTE_POOL
+  MIN_NODES = 1
+  MAX_NODES = 1
+  INSTANCE_FAMILY = CPU_X64_S
+  AUTO_RESUME = TRUE
+  AUTO_SUSPEND_SECS = 3600;
+
+-- Where the application's software package is stored
+CREATE IMAGE REPOSITORY IF NOT EXISTS ARKEMA_PRICING_DB.SPCS.ARC_IMAGES;
+
+-- Internet addresses the application needs (see Decision 2b)
+CREATE NETWORK RULE IF NOT EXISTS ARKEMA_PRICING_DB.SPCS.ARC_OSM_RULE
+  MODE = EGRESS TYPE = HOST_PORT
+  VALUE_LIST = (
+    'tile.openstreetmap.org:443',
+    'a.tile.openstreetmap.org:443',
+    'b.tile.openstreetmap.org:443',
+    'c.tile.openstreetmap.org:443',
+    'unpkg.com:443',
+    'cdnjs.cloudflare.com:443'
+  );
+
+CREATE NETWORK RULE IF NOT EXISTS ARKEMA_PRICING_DB.SPCS.ARC_FONTS_RULE
+  MODE = EGRESS TYPE = HOST_PORT
+  VALUE_LIST = ('fonts.googleapis.com:443','fonts.gstatic.com:443');
+
+CREATE EXTERNAL ACCESS INTEGRATION IF NOT EXISTS ARC_EXTERNAL_ACCESS
+  ALLOWED_NETWORK_RULES = (
+    ARKEMA_PRICING_DB.SPCS.ARC_OSM_RULE,
+    ARKEMA_PRICING_DB.SPCS.ARC_FONTS_RULE
+  )
+  ENABLED = TRUE;
+```
+
+*What this does: creates the small server the application runs on (which also switches itself off when idle), a private store for the application software, and a strictly limited allow-list of the only internet addresses the application may reach. It cannot reach anything else.*
+
+**If your security team rejects the internet addresses in Decision 2b:** skip the last three commands in this step and tell us. Everything else still works.
+
+---
+
+### Step 6 — Give our project role permission to use them
+
+```sql
+USE ROLE ACCOUNTADMIN;
+
+GRANT USAGE ON DATABASE ARKEMA_PRICING_DB             TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE ON SCHEMA   ARKEMA_PRICING_DB.SPCS        TO ROLE ARC_APP_DEPLOYER;
+GRANT CREATE SERVICE ON SCHEMA ARKEMA_PRICING_DB.SPCS TO ROLE ARC_APP_DEPLOYER;
+GRANT CREATE STAGE   ON SCHEMA ARKEMA_PRICING_DB.SPCS TO ROLE ARC_APP_DEPLOYER;
+
+GRANT USAGE, MONITOR, OPERATE ON COMPUTE POOL ARC_COMPUTE_POOL TO ROLE ARC_APP_DEPLOYER;
+GRANT READ, WRITE ON IMAGE REPOSITORY ARKEMA_PRICING_DB.SPCS.ARC_IMAGES TO ROLE ARC_APP_DEPLOYER;
+GRANT USAGE ON INTEGRATION ARC_EXTERNAL_ACCESS TO ROLE ARC_APP_DEPLOYER;
+```
+
+*What this does: allows our project role to deploy and run the application using only the resources created above. It does not grant access to any other data in your Snowflake account.*
+
+---
+
+### Step 7 — Run one check and send us the result
+
+```sql
+SHOW GRANTS TO ROLE ARC_APP_DEPLOYER;
+SHOW GRANTS TO ROLE PUBLIC;
+```
+
+Please send us:
+1. The output of both commands (a screenshot or copy-paste is fine).
+2. Your answer to Step 1 (paid or trial).
+3. Your answers to the Step 2 decisions.
+
+*Why the second command: one permission the application needs is normally switched on by default in Snowflake. We need to see whether your security team has turned it off. If it has been turned off, we will send you one extra line to run — we do not want to grant it unnecessarily.*
+
+---
+
+### What this does NOT give us
+
+So the review is straightforward:
+
+- **No access to any other Arkema data.** Only the new, empty `ARKEMA_PRICING_DB`.
+- **No administrator rights.** We are not asking for `ACCOUNTADMIN` or `SECURITYADMIN`.
+- **No ability to grant permissions to anyone else.**
+- **No unrestricted internet access.** Only the eight specific addresses listed in Step 5.
+- **Nothing granted to all users.** No permissions are given to Snowflake's `PUBLIC` role.
+
+Everything above can be removed later by dropping the `ARC_APP_DEPLOYER` role and the objects created in Steps 4 and 5.
+
+---
+
+### Any questions
+
+Contact **William Lin** (Snowflake Professional Services, App Productionalization workstream) or **Brendan Owens** (Service Delivery Manager). Happy to walk through this on a call if that is easier than working from the document.
+
+---
+
+*End of client-facing section. Everything below is Snowflake PS internal working notes.*
+
 ---
 
 ## 1. What I verified in the account (read-only, Sep 18)
