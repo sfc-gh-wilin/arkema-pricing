@@ -142,7 +142,15 @@ The App does use Cortex Agent with Sematic Views as well.
   - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing-ss/arc/
 Please make sure Grants covering AI usages as well.
 
+From your research on the existing App:
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing-ss/arc/
+Can you please help generate an Architecture MD file and diagram in PPTX?
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260918_Architecture.md
+  - /Users/wilin/Docs/LocalProjects/GitHub/arkema-pricing/20260918_Architecture.pptx
+
 # Todo
 
+- Review
+  - 20260918_Architecture.pptx
 
 # END

@@ -319,7 +319,11 @@ I will deploy with `ARC_APP_DEPLOYER` as the **primary** role and secondary role
 
 ## 3. Database, schema and warehouse
 
-`ARKEMA_PRICING_DB` does not exist. It has to be created before `arc/ddl` can be run, and **the repo has no `CREATE DATABASE` statement for it** — a known gap I will fix under M3-01.
+`ARKEMA_PRICING_DB` does not exist in `BR68104` and has to be created before `arc/ddl` can be run.
+
+> **Correction (Sep 18).** An earlier version of this document, and `20260915_ProjectPlan.md` §2, stated that the repo has no `CREATE DATABASE` for `ARKEMA_PRICING_DB`. **That is wrong** — `ddl/001_database.sql` contains `CREATE DATABASE IF NOT EXISTS ARKEMA_PRICING_DB`, along with all seven schemas, the warehouse, three stages, two file formats, the image repository and five RBAC roles. The audit's "no `CREATE DATABASE`" finding was about **`ARKEMA_PRICING_DB_SCALE`** — the `scale/` tree, which is out of scope as of Sep 16. The DDL *is* reproducible from empty. See `20260918_Architecture.md` §9.
+>
+> **Practical effect:** the SQL below overlaps with what `ddl/001_database.sql` already does. Both are idempotent (`IF NOT EXISTS`), so running the script afterwards is safe — but if Arkema prefers, they can create only the database and grant me ownership, and I will run `arc/ddl` for the rest.
 
 ```sql
 USE ROLE SYSADMIN;   -- or ACCOUNTADMIN
